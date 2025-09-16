@@ -22,6 +22,7 @@ interface AppState {
   mintedBlocks: PortfolioBlockId[];
   gasPrice: number;
   hasCompletedOnboarding: boolean;
+  isAssistantOpen: boolean;
 }
 
 const initialState: AppState = {
@@ -32,6 +33,7 @@ const initialState: AppState = {
   mintedBlocks: [],
   gasPrice: 0,
   hasCompletedOnboarding: false,
+  isAssistantOpen: false,
 };
 
 // Actions
@@ -42,7 +44,8 @@ type Action =
   | { type: "CLAIM_FAUCET"; payload: { amount: number } }
   | { type: "MINT_BLOCK"; payload: { blockId: PortfolioBlockId; cost: number } }
   | { type: "SET_GAS_PRICE"; payload: number }
-  | { type: "COMPLETE_ONBOARDING" };
+  | { type: "COMPLETE_ONBOARDING" }
+  | { type: "TOGGLE_ASSISTANT" };
 
 // Reducer
 function appReducer(state: AppState, action: Action): AppState {
@@ -83,6 +86,8 @@ function appReducer(state: AppState, action: Action): AppState {
       return { ...state, gasPrice: action.payload };
     case "COMPLETE_ONBOARDING":
       return { ...state, hasCompletedOnboarding: true };
+    case "TOGGLE_ASSISTANT":
+      return { ...state, isAssistantOpen: !state.isAssistantOpen };
     default:
       return state;
   }
@@ -128,7 +133,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         console.error("Failed to save state to localStorage:", error);
       }
     }
-  }, [state]);
+  }, [state.isAuthenticated, state.walletAddress, state.walletBalance, state.mintedBlocks, state.hasCompletedOnboarding, state.isInitialized]);
 
 
   return (

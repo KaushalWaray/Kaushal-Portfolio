@@ -2,7 +2,7 @@
 
 import { useAppContext } from "@/contexts/app-context";
 import { Button } from "@/components/ui/button";
-import { LogOut, Fuel, CircleDollarSign } from "lucide-react";
+import { LogOut, Fuel, CircleDollarSign, Bot } from "lucide-react";
 import { FaucetButton } from "./faucet-button";
 import { useEffect } from "react";
 import { getGasPrice } from "@/ai/flows/simulate-gas-oracle";
@@ -60,6 +60,10 @@ export function Header() {
           </h1>
         </div>
         <div className="flex items-center gap-2 sm:gap-4">
+          <Button variant="outline" size="sm" onClick={() => dispatch({ type: 'TOGGLE_ASSISTANT' })}>
+            <Bot className="mr-2 h-4 w-4" />
+            AI Assistant
+          </Button>
           <div className="hidden md:flex">
             <GasOracle />
           </div>

@@ -9,6 +9,7 @@ import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useState, useMemo } from "react";
 import { OnboardingGuide } from "./onboarding-guide";
 import { RewardModal } from "./reward-modal";
+import { AiAssistant } from "./ai-assistant";
 
 const contentBlockIds: PortfolioBlockId[] = ["about", "projects", "skills", "education", "certifications", "contact"];
 
@@ -112,6 +113,7 @@ export function Dashboard() {
       </main>
       {!state.hasCompletedOnboarding && state.isAuthenticated && <OnboardingGuide />}
       <RewardModal isOpen={showReward} onOpenChange={setShowReward} />
+      <AiAssistant />
     </div>
   );
 }
