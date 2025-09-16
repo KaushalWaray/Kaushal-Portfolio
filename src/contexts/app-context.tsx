@@ -61,12 +61,11 @@ function appReducer(state: AppState, action: Action): AppState {
       };
     case "DISCONNECT_WALLET":
       localStorage.removeItem(LOCAL_STORAGE_KEY);
-      // Reset all state except for onboarding status
+      // Reset all state to initial values for a clean session.
       return { 
         ...initialState, 
-        isInitialized: true, 
-        isAuthenticated: false,
-        hasCompletedOnboarding: state.hasCompletedOnboarding 
+        isInitialized: true,
+        isAuthenticated: false
       };
     case "CLAIM_FAUCET":
       return {
@@ -108,7 +107,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
       const savedState = localStorage.getItem(LOCAL_STORAGE_KEY);
       if (savedState) {
         const parsedState = JSON.parse(savedState);
-        dispatch({ type: "LOAD_STATE", payload: parsedState });
+        // On initial load, don't auto-authenticate. Only load onboarding status.
+        // Authentication happens via user action (connecting wallet).
+        dispatch({ type: "LOAD_STATE", payload: { hasCompletedOnboarding: parsedState.hasCompletedOnboarding } });
       } else {
         dispatch({ type: "LOAD_STATE", payload: {} }); // Mark as initialized
       }
@@ -119,6 +120,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
+    // Only save state to localStorage if the user is authenticated.
     if (state.isInitialized && state.isAuthenticated) {
       try {
         const stateToSave = {
@@ -133,7 +135,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         console.error("Failed to save state to localStorage:", error);
       }
     }
-  }, [state.isAuthenticated, state.walletAddress, state.walletBalance, state.mintedBlocks, state.hasCompletedOnboarding, state.isInitialized]);
+  }, [state]);
 
 
   return (
