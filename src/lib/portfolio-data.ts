@@ -51,8 +51,8 @@ export const portfolioData: Record<string, PortfolioBlock> = {
           title: 'Automated DevSecOps Pipeline for Smart Contracts',
           description:
             'Built a CI/CD pipeline (GitHub Actions, Hardhat) for automated contract deployment. Integrated Slither for automated pre-deployment security vulnerability scanning. Orchestrated end-to-end automation: linting, testing, deploying to Sepolia.',
-          imageUrl: devsecopsImage?.imageUrl || '',
-          imageHint: devsecopsImage?.imageHint || '',
+          imageUrl: 'https://i.imgur.com/yV9n8J7.png',
+          imageHint: 'devsecops pipeline diagram',
           techStack: [
             { name: 'Solidity', icon: IconSolidity },
             { name: 'Hardhat', icon: IconReact }, // Using react icon as placeholder for hardhat
