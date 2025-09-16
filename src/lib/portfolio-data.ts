@@ -9,6 +9,12 @@ import {
   IconTailwind,
   IconTs,
 } from '@/components/icons/tech-icons';
+import { PlaceHolderImages } from './placeholder-images';
+
+const metaDriveImage = PlaceHolderImages.find(p => p.id === 'kaushal-metadrive');
+const devsecopsImage = PlaceHolderImages.find(p => p.id === 'kaushal-devsecops');
+const profileImage = PlaceHolderImages.find(p => p.id === 'kaushal-profile');
+
 
 export const portfolioData: Record<string, PortfolioBlock> = {
   about: {
@@ -16,9 +22,9 @@ export const portfolioData: Record<string, PortfolioBlock> = {
     title: 'About Me',
     content: {
       description:
-        "Hello! I'm a passionate full-stack developer with a love for building innovative and decentralized applications. With a background in both front-end and back-end technologies, I specialize in creating seamless user experiences powered by robust and scalable architectures. I'm driven by the potential of blockchain to revolutionize how we interact with the web.",
-      profileImage: 'https://picsum.photos/seed/kaushal-profile/400/400',
-      profileImageHint: 'professional developer portrait',
+        "Motivated individual with a strong interest in blockchain technology and cloud computing. Actively pursuing a Master of Computer Applications degree, showcasing commitment to advanced technical knowledge and development. Dedicated to exploring innovative solutions and emerging technologies in the digital space. Seeking opportunities to contribute passion for blockchain and cloud systems to a dynamic and forward-thinking team.",
+      profileImage: profileImage?.imageUrl,
+      profileImageHint: profileImage?.imageHint,
     },
     complexity: 'Simple text and image block.',
     engagement: 'Low user interaction, primarily for reading.',
@@ -30,30 +36,26 @@ export const portfolioData: Record<string, PortfolioBlock> = {
       description: 'Here are some of the projects I am proud to have worked on.',
       projects: [
         {
-          title: 'DeFi Yield Aggregator',
+          title: 'MetaDrive: Decentralized File Storage Sharing Wallet',
           description:
-            'A platform that automatically moves user funds between different lending protocols to maximize interest gains. Features a clean dashboard and transaction history.',
-          imageUrl: 'https://picsum.photos/seed/kaushal-project1/600/400',
-          imageHint: 'decentralized finance dashboard',
+            'Engineered a decentralized storage app for Algorand. Utilized IPFS (Pinata) for file storage and a PyTeal contract for on-chain records. Implemented PIN-based encryption to secure wallet mnemonics.',
+          imageUrl: metaDriveImage?.imageUrl || '',
+          imageHint: metaDriveImage?.imageHint || '',
           techStack: [
-            { name: 'React', icon: IconReact },
-            { name: 'Solidity', icon: IconSolidity },
             { name: 'Next.js', icon: IconNextjs },
-            { name: 'Tailwind CSS', icon: IconTailwind },
+            { name: 'TypeScript', icon: IconTs },
           ],
           repoUrl: '#',
         },
         {
-          title: 'NFT Marketplace',
+          title: 'Automated DevSecOps Pipeline for Smart Contracts',
           description:
-            'A full-featured marketplace for creating, buying, and selling non-fungible tokens. Implemented smart contracts for auctions and secure ownership transfer.',
-          imageUrl: 'https://picsum.photos/seed/kaushal-project2/600/400',
-          imageHint: 'NFT art collection',
+            'Built a CI/CD pipeline (GitHub Actions, Hardhat) for automated contract deployment. Integrated Slither for automated pre-deployment security vulnerability scanning. Orchestrated end-to-end automation: linting, testing, deploying to Sepolia.',
+          imageUrl: devsecopsImage?.imageUrl || '',
+          imageHint: devsecopsImage?.imageHint || '',
           techStack: [
-            { name: 'TypeScript', icon: IconTs },
-            { name: 'Next.js', icon: IconNextjs },
-            { name: 'AWS', icon: IconAws },
-            { name: 'Shadcn/UI', icon: IconShadcn },
+            { name: 'Solidity', icon: IconSolidity },
+            { name: 'Hardhat', icon: IconReact }, // Using react icon as placeholder for hardhat
           ],
           liveUrl: '#',
           repoUrl: '#',
@@ -73,20 +75,20 @@ export const portfolioData: Record<string, PortfolioBlock> = {
         "I've cultivated a diverse skillset in web and blockchain development.",
       skills: [
         {
-          category: 'Languages',
-          list: ['JavaScript (ES6+)', 'TypeScript', 'Solidity', 'HTML5', 'CSS3'],
+          category: 'Cloud & DevOps',
+          list: ['Oracle Cloud (OCI)', 'AWS (EC2, S3)', 'Docker', 'Terraform', 'Jenkins', 'CI/CD', 'GitHub Actions', 'Linux', 'Bash'],
         },
         {
-          category: 'Frameworks & Libraries',
-          list: ['React', 'Next.js', 'Node.js', 'Express', 'Tailwind CSS'],
+          category: 'Blockchain & Web3',
+          list: ['Solidity', 'PyTeal', 'Hardhat', 'Ethers.js', 'Ethereum', 'Algorand', 'IPFS', 'OpenZeppelin'],
         },
         {
-          category: 'Blockchain',
-          list: ['Ethereum', 'Hardhat', 'Ethers.js', 'The Graph', 'IPFS'],
+          category: 'Programming & Databases',
+          list: ['Python', 'JavaScript', 'TypeScript', 'React.js', 'Next.js', 'SQL', 'MongoDB'],
         },
         {
-          category: 'Databases & Cloud',
-          list: ['PostgreSQL', 'MongoDB', 'AWS', 'Firebase', 'Vercel'],
+          category: 'Professional Skills',
+          list: ['Problem Solving', 'Team Collaboration', 'Technical Communication', 'Agile Methodologies'],
         },
       ],
     },
@@ -102,26 +104,20 @@ export const portfolioData: Record<string, PortfolioBlock> = {
       contact: [
         {
           method: 'Email',
-          value: 'hello@example.com',
-          href: 'mailto:hello@example.com',
+          value: 'kaushalwaray@gmail.com',
+          href: 'mailto:kaushalwaray@gmail.com',
           icon: Mail,
         },
         {
           method: 'LinkedIn',
-          value: 'linkedin.com/in/dapp-dev',
-          href: '#',
+          value: 'linkedin.com/in/kaushalwaray',
+          href: 'https://linkedin.com/in/kaushalwaray',
           icon: Linkedin,
         },
         {
-          method: 'Twitter',
-          value: '@dappfolio_dev',
-          href: '#',
-          icon: Twitter,
-        },
-        {
           method: 'GitHub',
-          value: 'github.com/dapp-dev',
-          href: '#',
+          value: 'github.com/KaushalWaray',
+          href: 'https://github.com/KaushalWaray',
           icon: Github,
         },
       ],

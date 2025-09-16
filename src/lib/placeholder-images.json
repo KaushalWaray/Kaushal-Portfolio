@@ -1,3 +1,4 @@
+
 {
   "placeholderImages": [
     {
@@ -7,16 +8,16 @@
       "imageHint": "professional developer portrait"
     },
     {
-      "id": "kaushal-project1",
-      "description": "A placeholder image for the DeFi Yield Aggregator project.",
-      "imageUrl": "https://picsum.photos/seed/kaushal-project1/600/400",
-      "imageHint": "decentralized finance dashboard"
+      "id": "kaushal-metadrive",
+      "description": "A placeholder image for the MetaDrive project.",
+      "imageUrl": "https://picsum.photos/seed/kaushal-metadrive/600/400",
+      "imageHint": "decentralized cloud storage"
     },
     {
-      "id": "kaushal-project2",
-      "description": "A placeholder image for the NFT Marketplace project.",
-      "imageUrl": "https://picsum.photos/seed/kaushal-project2/600/400",
-      "imageHint": "NFT art collection"
+      "id": "kaushal-devsecops",
+      "description": "A placeholder image for the Automated DevSecOps Pipeline project.",
+      "imageUrl": "https://picsum.photos/seed/kaushal-devsecops/600/400",
+      "imageHint": "smart contract security"
     }
   ]
 }
