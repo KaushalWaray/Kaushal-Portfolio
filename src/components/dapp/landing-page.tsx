@@ -32,9 +32,9 @@ export function LandingPage() {
 
   return (
     <>
-      <div className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-background">
+      <div className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-background text-center">
         <div 
-          className="absolute inset-0 z-0 bg-background"
+          className="absolute inset-0 z-0"
           style={{
             backgroundImage: 'radial-gradient(ellipse 80% 50% at 50% -20%, hsl(var(--primary)/0.1), transparent)'
           }}
@@ -42,7 +42,7 @@ export function LandingPage() {
             <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
         </div>
 
-        <div className="relative z-10 flex flex-col items-center text-center p-4">
+        <div className="relative z-10 flex flex-col items-center p-4">
           <motion.h1 
             className="font-headline text-5xl font-bold md:text-7xl"
             initial={{ opacity: 0, y: -50 }}
