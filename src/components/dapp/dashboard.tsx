@@ -5,161 +5,122 @@ import { PortfolioBlockDisplay } from "@/components/dapp/portfolio-block";
 import { portfolioData } from "@/lib/portfolio-data";
 import type { PortfolioBlockId } from "@/lib/types";
 import { AiAssistant } from "@/components/dapp/ai-assistant";
-import { motion, AnimatePresence } from 'framer-motion';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { motion } from 'framer-motion';
 import { useAppContext } from "@/contexts/app-context";
-import { User, Dna } from "lucide-react";
 import React from "react";
+import { cn } from "@/lib/utils";
+import { Cpu } from "lucide-react";
 
 
-const blockOrder: PortfolioBlockId[] = ["about", "projects", "skills", "contact"];
+const contentBlockIds: PortfolioBlockId[] = ["about", "projects", "skills", "contact"];
+const totalBlocks = 12; // 4 content blocks + 8 dummy blocks
 
-const orbitalPositions = [
-    { top: '15%', left: '15%' }, // about
-    { top: '25%', left: '75%' }, // projects
-    { top: '70%', left: '10%' }, // skills
-    { top: '75%', left: '80%' }, // contact
-];
+const blockData = Array.from({ length: totalBlocks }).map((_, index) => {
+    const isContentBlock = index % 3 === 0;
+    if (isContentBlock) {
+        const contentIndex = index / 3;
+        const id = contentBlockIds[contentIndex];
+        return { isDummy: false, id: id, data: portfolioData[id] };
+    }
+    return { isDummy: true, id: `dummy-${index}` };
+});
 
-const LineConnector = ({ fromRef, toRef, isVisible }: { fromRef: React.RefObject<HTMLDivElement>, toRef: React.RefObject<HTMLDivElement>, isVisible: boolean }) => {
-    const [path, setPath] = React.useState('');
-
-    const calculatePath = React.useCallback(() => {
-        if (fromRef.current && toRef.current) {
-            const fromRect = fromRef.current.getBoundingClientRect();
-            const toRect = toRef.current.getBoundingClientRect();
-            const containerRect = fromRef.current.closest('main')?.getBoundingClientRect();
-
-            if (containerRect) {
-                const startX = fromRect.left + fromRect.width / 2 - containerRect.left;
-                const startY = fromRect.top + fromRect.height / 2 - containerRect.top;
-                const endX = toRect.left + toRect.width / 2 - containerRect.left;
-                const endY = toRect.top + toRect.height / 2 - containerRect.top;
-                
-                const pathData = `M ${startX} ${startY} L ${endX} ${endY}`;
-                setPath(pathData);
-            }
-        }
-    }, [fromRef, toRef]);
-
-    React.useEffect(() => {
-        calculatePath();
-        window.addEventListener('resize', calculatePath);
-        const observer = new MutationObserver(calculatePath);
-        if(fromRef.current?.parentElement) {
-          observer.observe(fromRef.current.parentElement, { attributes: true, childList: true, subtree: true });
-        }
-
-
-        return () => {
-          window.removeEventListener('resize', calculatePath);
-          observer.disconnect();
-        }
-    }, [calculatePath, fromRef]);
-
-    return (
-      <AnimatePresence>
-        {isVisible && (
-            <motion.path
-                d={path}
-                fill="none"
-                stroke="hsl(var(--primary) / 0.3)"
-                strokeWidth="1.5"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 1 }}
-                exit={{ pathLength: 0, opacity: 0 }}
-                transition={{ duration: 1, ease: "easeInOut" }}
-                className="connector-line"
-            />
-        )}
-      </AnimatePresence>
-    );
-};
 
 export function Dashboard() {
-  const { state } = useAppContext();
-  const blockRefs = React.useRef(new Map<PortfolioBlockId | 'genesis', React.RefObject<HTMLDivElement>>());
+    const radius = Math.min(window.innerWidth, window.innerHeight) / 2 - 80;
+    const blockRefs = React.useRef<(HTMLDivElement | null)[]>([]);
 
-  const getRef = (id: PortfolioBlockId | 'genesis') => {
-      if (!blockRefs.current.has(id)) {
-          blockRefs.current.set(id, React.createRef<HTMLDivElement>());
-      }
-      return blockRefs.current.get(id)!;
-  };
+    const getPosition = (index: number) => {
+        const angle = (index / totalBlocks) * 2 * Math.PI;
+        const x = radius * Math.cos(angle - Math.PI / 2);
+        const y = radius * Math.sin(angle - Math.PI / 2);
+        return { x, y };
+    };
 
-  const genesisRef = getRef('genesis');
-  
-  return (
-    <div className="min-h-screen w-full bg-background overflow-hidden">
-      <Header />
-      <main className="h-[calc(100vh-4rem)] w-full relative">
-        
-        <svg className="absolute top-0 left-0 w-full h-full" style={{ zIndex: 1, pointerEvents: 'none' }}>
-            {blockOrder.map((id) => {
-                const isLineVisible = state.mintedBlocks.includes(id);
-                return (
-                  <LineConnector
-                      key={`line-${id}`}
-                      fromRef={genesisRef}
-                      toRef={getRef(id)}
-                      isVisible={isLineVisible}
-                  />
-                );
-            })}
-        </svg>
+    const Line = ({ fromIndex, toIndex }: { fromIndex: number, toIndex: number }) => {
+        const [path, setPath] = React.useState('');
 
-        <div ref={genesisRef} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-          <motion.div 
-            className="flex flex-col items-center space-y-4"
-            animate={{
-                scale: [1, 1.03, 1],
-                transition: { duration: 5, repeat: Infinity, ease: 'easeInOut' }
-            }}
-          >
-              <div className="relative">
-                <Avatar className="w-32 h-32 border-4 border-primary/80 shadow-lg bg-background p-1">
-                    <AvatarImage src={portfolioData.about.content.profileImage} alt="Kaushal Waray" className="rounded-full"/>
-                    <AvatarFallback><User /></AvatarFallback>
-                </Avatar>
-                <div className="absolute -bottom-3 -right-3 bg-primary rounded-full p-2 border-4 border-background">
-                    <Dna className="h-6 w-6 text-primary-foreground" />
-                </div>
-              </div>
-              <div className="text-center">
-                  <h2 className="font-headline text-3xl font-bold">Kaushal Waray</h2>
-                  <p className="text-muted-foreground text-sm font-mono">Genesis Block</p>
-              </div>
-          </motion.div>
+        React.useEffect(() => {
+            const fromPos = getPosition(fromIndex);
+            const toPos = getPosition(toIndex);
+            
+            setPath(`M ${fromPos.x} ${fromPos.y} L ${toPos.x} ${toPos.y}`);
+
+        }, [fromIndex, toIndex]);
+
+        return <motion.path d={path} stroke="hsl(var(--primary) / 0.2)" strokeWidth="1" />;
+    };
+
+    return (
+        <div className="min-h-screen w-full bg-background overflow-hidden">
+            <Header />
+            <main className="h-[calc(100vh-4rem)] w-full relative flex items-center justify-center">
+
+                <motion.div
+                    className="absolute"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 180, repeat: Infinity, ease: 'linear' }}
+                >
+                    <svg className="absolute top-0 left-0" width={radius*2} height={radius*2} viewBox={`${-radius} ${-radius} ${radius*2} ${radius*2}`} style={{transform: 'translate(-50%, -50%)'}}>
+                        <g>
+                           {blockData.map((_, i) => (
+                               <Line key={`line-${i}`} fromIndex={i} toIndex={(i + 1) % totalBlocks} />
+                           ))}
+                        </g>
+                    </svg>
+
+                    {blockData.map((block, index) => {
+                        const { x, y } = getPosition(index);
+                        return (
+                            <motion.div
+                                key={block.id}
+                                ref={el => blockRefs.current[index] = el}
+                                className="absolute"
+                                initial={{ x: 0, y: 0 }}
+                                animate={{ x, y }}
+                                transition={{ type: 'spring', stiffness: 50, damping: 20 }}
+                                style={{
+                                    transformOrigin: `${-x}px ${-y}px`,
+                                }}
+                            >
+                                <motion.div
+                                    animate={{ rotate: -360 }}
+                                    transition={{ duration: 180, repeat: Infinity, ease: 'linear' }}
+                                >
+                                    {block.isDummy ? (
+                                        <DummyBlock />
+                                    ) : (
+                                        <PortfolioBlockDisplay block={block.data!} />
+                                    )}
+                                </motion.div>
+                            </motion.div>
+                        );
+                    })}
+                </motion.div>
+
+            </main>
+            <AiAssistant />
         </div>
+    );
+}
 
-        {blockOrder.map((id, index) => (
-            <motion.div
-                key={id}
-                ref={getRef(id)}
-                className="absolute z-10"
-                style={{ ...orbitalPositions[index] }}
-                animate={{
-                    transform: [
-                        'translate(0px, 0px)',
-                        'translate(5px, 5px)',
-                        'translate(0px, 10px)',
-                        'translate(-5px, 5px)',
-                        'translate(0px, 0px)',
-                    ],
-                }}
-                transition={{
-                    duration: 10 + index * 2,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                    repeatType: 'mirror'
-                }}
-            >
-                <PortfolioBlockDisplay block={portfolioData[id]} />
-            </motion.div>
-        ))}
 
-      </main>
-      <AiAssistant />
-    </div>
-  );
+function DummyBlock() {
+    return (
+        <div
+            className={cn(
+                "relative w-72 rounded-2xl border-2 backdrop-blur-xl transition-all duration-500",
+                "border-border/20 bg-card/10",
+                "flex flex-col items-center justify-center p-6 gap-4 text-center h-[204px]"
+            )}
+        >
+            <div className="w-16 h-16 rounded-full flex items-center justify-center bg-muted/50 text-muted-foreground/50">
+                <Cpu className="h-8 w-8" />
+            </div>
+            <div>
+                <h3 className="font-mono text-xl text-muted-foreground/50">Empty Block</h3>
+                <p className="text-sm text-muted-foreground/30 font-mono">Unallocated</p>
+            </div>
+        </div>
+    );
 }

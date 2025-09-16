@@ -39,7 +39,7 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
       >
         <div
           className={cn(
-            "relative w-full rounded-2xl border-2 backdrop-blur-xl transition-all duration-500",
+            "relative w-full rounded-2xl border-2 backdrop-blur-xl transition-all duration-500 h-[204px]",
             isMined
               ? "border-primary/70 bg-primary/10 shadow-2xl shadow-primary/20"
               : "border-border/50 bg-card/50"
@@ -65,7 +65,7 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
             </div>
           </div>
 
-          <div className="px-6 pb-6">
+          <div className="absolute bottom-6 left-6 right-6">
             {isMined ? (
               <Button className="w-full" variant="outline" onClick={() => setIsContentModalOpen(true)}>
                 <Eye className="mr-2 h-4 w-4" />
