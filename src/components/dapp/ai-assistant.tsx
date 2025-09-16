@@ -49,7 +49,24 @@ export function AiAssistant() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-6 right-6 z-50 flex items-end gap-3">
+       <AnimatePresence>
+        {!isOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ delay: 2, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="relative"
+          >
+            <div className="bg-primary text-primary-foreground text-sm font-medium py-2 px-4 rounded-lg shadow-xl">
+              AI Assistant
+            </div>
+            <div className="absolute bottom-2 right-[-5px] w-0 h-0 border-t-[8px] border-t-transparent border-l-[8px] border-l-primary border-b-[8px] border-b-transparent"></div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {isOpen && (
             <motion.div
