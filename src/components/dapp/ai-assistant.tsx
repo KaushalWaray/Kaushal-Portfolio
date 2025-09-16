@@ -17,6 +17,7 @@ import { portfolioAssistant } from "@/ai/flows/portfolio-assistant-flow";
 import { Bot, User, Loader2, Feather } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import ReactMarkdown from "react-markdown";
 
 type Message = {
   role: 'user' | 'assistant';
@@ -134,7 +135,9 @@ export function AiAssistant() {
                             : "bg-secondary text-secondary-foreground"
                         )}
                         >
-                        <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                        <div className="prose prose-sm prose-invert max-w-none">
+                            <ReactMarkdown>{message.content}</ReactMarkdown>
+                        </div>
                         </div>
                         {message.role === "user" && (
                         <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center shrink-0">
