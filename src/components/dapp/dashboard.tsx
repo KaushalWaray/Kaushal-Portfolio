@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { OnboardingGuide } from "./onboarding-guide";
 import { RewardModal } from "./reward-modal";
 
-const contentBlockIds: PortfolioBlockId[] = ["about", "projects", "skills", "certifications", "contact"];
+const contentBlockIds: PortfolioBlockId[] = ["about", "projects", "skills", "education", "certifications", "contact"];
 
 const MouseTrackedSpotlight = () => {
     const mouseX = useMotionValue(0);

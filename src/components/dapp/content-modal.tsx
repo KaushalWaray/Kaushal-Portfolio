@@ -11,7 +11,7 @@ import {
   import { Badge } from "@/components/ui/badge";
   import Image from "next/image";
   import { Button } from "../ui/button";
-  import { ExternalLink, Github, BookCopy } from "lucide-react";
+  import { ExternalLink, Github, BookCopy, GraduationCap } from "lucide-react";
   import Link from "next/link";
   import { useEffect, useState } from "react";
   import { useAppContext } from "@/contexts/app-context";
@@ -149,6 +149,31 @@ import {
                                 View Credential
                                </Link>
                             </Button>
+                        </div>
+                    ))}
+
+                    {block.id === 'education' && block.content.education?.map((edu, index) => (
+                        <div key={index} className="mt-6 rounded-lg border bg-card/50 p-4">
+                           <div className="flex items-start gap-4">
+                                <div className="mt-1">
+                                    <GraduationCap className="h-6 w-6 text-primary"/>
+                                </div>
+                                <div>
+                                    <h4 className="font-headline text-xl">{edu.degree}</h4>
+                                    <p className="text-sm text-muted-foreground mt-1">{edu.institution}</p>
+                                    <p className="font-mono text-xs text-primary mt-1">GPA: {edu.gpa}</p>
+                                </div>
+                           </div>
+                           <div className="mt-4">
+                                <h5 className="text-sm font-semibold mb-2">Relevant Coursework:</h5>
+                                <div className="flex flex-wrap gap-2">
+                                    {edu.coursework.map(course => (
+                                        <Badge key={course} variant="secondary">
+                                            {course}
+                                        </Badge>
+                                    ))}
+                                </div>
+                           </div>
                         </div>
                     ))}
                 </div>

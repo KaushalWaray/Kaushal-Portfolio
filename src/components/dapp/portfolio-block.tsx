@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { useAppContext } from "@/contexts/app-context";
 import type { PortfolioBlock } from "@/lib/types";
-import { Lock, Unlock, Eye, DownloadCloud, LinkIcon, FileText, Briefcase, Star, Phone, Award } from "lucide-react";
+import { Lock, Unlock, Eye, DownloadCloud, LinkIcon, FileText, Briefcase, Star, Phone, Award, GraduationCap } from "lucide-react";
 import { useState, useMemo } from "react";
 import { MintModal } from "./mint-modal";
 import { ContentModal } from "./content-modal";
@@ -20,6 +20,7 @@ const blockIcons: Record<string, React.ElementType> = {
   skills: Star,
   contact: Phone,
   certifications: Award,
+  education: GraduationCap,
 };
 
 

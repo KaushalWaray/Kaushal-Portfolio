@@ -1,6 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 
-export type PortfolioBlockId = 'about' | 'projects' | 'skills' | 'contact' | 'certifications';
+export type PortfolioBlockId = 'about' | 'projects' | 'skills' | 'contact' | 'certifications' | 'education';
 
 export type TechStack = {
   name: string;
@@ -22,16 +22,25 @@ export type Certification = {
   credentialUrl: string;
 };
 
+export type EducationEntry = {
+    degree: string;
+    institution: string;
+    gpa: string;
+    coursework: string[];
+}
+
 export type PortfolioBlock = {
   id: PortfolioBlockId;
   title: string;
   content: {
     description: string;
     profileImage?: string;
+    profileImageHint?: string;
     projects?: Project[];
     skills?: { category: string; list: string[] }[];
     contact?: { method: string; value: string; href: string, icon: LucideIcon }[];
     certifications?: Certification[];
+    education?: EducationEntry[];
   };
   complexity: string; // For AI cost calculation
   engagement: string; // For AI cost calculation

@@ -18,7 +18,8 @@ export const portfolioData: Record<string, PortfolioBlock> = {
     content: {
       description:
         "My mission is to build the secure, decentralized future of the web. With hands-on experience in both blockchain development and cloud infrastructure, I build robust, end-to-end solutions. My work includes creating decentralized storage applications and engineering automated DevSecOps pipelines to secure smart contracts. As I complete my Master of Computer Applications, I'm eager to apply my skills in a dynamic role where I can contribute to cutting-edge blockchain and Web3 projects.",
-      profileImage: '/Profile.jpg',
+      profileImage: 'https://picsum.photos/seed/kaushal-profile/400/400',
+      profileImageHint: 'professional developer portrait'
     },
     complexity: 'Simple text and image block.',
     engagement: 'Low user interaction, primarily for reading.',
@@ -165,4 +166,27 @@ export const portfolioData: Record<string, PortfolioBlock> = {
     engagement:
       'Medium user engagement, encourages users to verify credentials.',
   },
+  education: {
+    id: 'education',
+    title: 'Education',
+    content: {
+      description: "My academic background has provided a strong foundation for my career in technology.",
+      education: [
+        {
+          degree: 'Master of Computer Application',
+          institution: 'K.K. Wagh Institute Of Engineering Education and Research',
+          gpa: '7.57/10',
+          coursework: ['Cloud Computing', 'Data Structures & Algorithms', 'DBMS', 'Software Engineering', 'Research Methodology']
+        },
+        {
+          degree: 'Bachelor of Science in Computer Science',
+          institution: 'Gokhale Education Society’s R.H. Sapat College of Engineering',
+          gpa: '7.7/10',
+          coursework: ['Operating Systems', 'Computer Networks', 'Computational Theory', 'Blockchain Technology']
+        }
+      ]
+    },
+    complexity: 'Medium complexity, text-based list of degrees.',
+    engagement: 'Low user interaction, primarily for reading.',
+  }
 };
