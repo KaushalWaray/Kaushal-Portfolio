@@ -46,7 +46,7 @@ export const portfolioData: Record<string, PortfolioBlock> = {
         {
           title: 'Automated DevSecOps Pipeline for Smart Contracts',
           description:
-            'Built a CI/CD pipeline (GitHub Actions, Hardhat) for automated contract deployment. Integrated Slither for automated pre-deployment security vulnerability scanning. Orchestrated end-to-end automation: linting, testing, deploying to Sepolia.',
+            'Built an automated CI/CD pipeline using GitHub Actions and Hardhat for Ethereum smart contracts. The system integrates linting with Solhint, static analysis with Slither, and automated testing, culminating in conditional deployment to the Sepolia testnet. This ensures a high standard of code quality and security for every change.',
           techStack: [
             { name: 'Solidity', icon: IconSolidity },
             { name: 'TypeScript', icon: IconTs },
@@ -59,9 +59,9 @@ export const portfolioData: Record<string, PortfolioBlock> = {
       ],
     },
     complexity:
-      'Complex block with multiple entries, images, and external links.',
+      'Complex block with multiple entries, descriptions, and external links.',
     engagement:
-      'High user interaction, includes viewing images, reading descriptions, and clicking links.',
+      'High user interaction, includes reading descriptions and clicking links.',
   },
   skills: {
     id: 'skills',
@@ -79,8 +79,12 @@ export const portfolioData: Record<string, PortfolioBlock> = {
           list: ['Solidity', 'PyTeal', 'Hardhat', 'Ethers.js', 'Ethereum', 'Algorand', 'IPFS', 'OpenZeppelin'],
         },
         {
-          category: 'Programming & Databases',
-          list: ['Python', 'JavaScript', 'TypeScript', 'React.js', 'Next.js', 'SQL', 'MongoDB'],
+          category: 'Frontend Development',
+          list: ['React.js', 'Next.js', 'Tailwind CSS', 'ShadCN UI'],
+        },
+        {
+            category: 'Programming & Databases',
+            list: ['Python', 'JavaScript', 'TypeScript', 'SQL', 'MongoDB'],
         },
         {
           category: 'Professional Skills',
