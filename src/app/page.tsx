@@ -14,7 +14,9 @@ export default function Home() {
   }, []);
 
   if (!isClient) {
-    return null; // Render nothing on the server to avoid hydration mismatch
+    // Render a static version of the landing page on the server
+    // to avoid a hydration mismatch.
+    return <LandingPage />;
   }
   
   return (
