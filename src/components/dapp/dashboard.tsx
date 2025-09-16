@@ -36,14 +36,9 @@ const MouseTrackedSpotlight = () => {
 
 
 export function Dashboard() {
-  const [isClient, setIsClient] = useState(false);
   const { state } = useAppContext();
   const [showReward, setShowReward] = useState(false);
   const [hasShownReward, setHasShownReward] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   const contentBlocks = useMemo(() => contentBlockIds.map(id => portfolioData[id]), []);
 
@@ -57,8 +52,6 @@ export function Dashboard() {
 
 
   const doubledContentBlocks = useMemo(() => [...contentBlocks, ...contentBlocks], [contentBlocks]);
-
-  if (!isClient) return null;
 
   return (
     <div className="min-h-screen w-full bg-background overflow-hidden flex flex-col">
