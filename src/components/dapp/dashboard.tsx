@@ -5,7 +5,7 @@ import { PortfolioBlockDisplay } from "@/components/dapp/portfolio-block";
 import { portfolioData } from "@/lib/portfolio-data";
 import type { PortfolioBlockId } from "@/lib/types";
 import { useAppContext } from "@/contexts/app-context";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useState, useMemo } from "react";
 import { OnboardingGuide } from "./onboarding-guide";
 import { RewardModal } from "./reward-modal";
