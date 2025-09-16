@@ -13,7 +13,7 @@
     --popover: 222 83% 4%;
     --popover-foreground: 210 40% 98%;
  
-    --primary: 217 91% 60%;
+    --primary: 38 92% 50%;
     --primary-foreground: 210 40% 98%;
  
     --secondary: 217 33% 17%;
@@ -30,39 +30,39 @@
 
     --border: 217 33% 17%;
     --input: 217 33% 17%;
-    --ring: 217 91% 60%;
+    --ring: 38 92% 50%;
  
     --radius: 0.5rem;
   }
  
   .dark {
-    --background: 224 71% 4%; /* Deep Space Blue */
-    --foreground: 213 30% 90%; /* Softer off-white */
-
-    --card: 220 26% 10%; /* Slightly lighter blue-gray for cards */
-    --card-foreground: 213 30% 90%;
-
-    --popover: 224 71% 4%;
-    --popover-foreground: 213 30% 90%;
-
-    --primary: 38 92% 50%; /* Molten Gold / Amber */
-    --primary-foreground: 220 26% 10%; /* Dark text on gold buttons */
-
-    --secondary: 215 28% 17%; /* Cool, dark blue-gray */
-    --secondary-foreground: 213 30% 90%;
-
-    --muted: 215 28% 17%;
-    --muted-foreground: 215 20% 55%;
-
-    --accent: 215 28% 25%; /* A slightly lighter shade for hovers */
-    --accent-foreground: 213 30% 90%;
-
-    --destructive: 0 63% 40%;
+    --background: 222 83% 4%;
+    --foreground: 210 40% 98%;
+ 
+    --card: 222 83% 4%;
+    --card-foreground: 210 40% 98%;
+ 
+    --popover: 222 83% 4%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --primary: 38 92% 50%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+ 
+    --accent: 158 81% 45%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 215 28% 17%;
-    --input: 215 28% 17%;
-    --ring: 38 92% 50%; /* Ring color matches the new primary gold */
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 38 92% 50%;
   }
 }
  
