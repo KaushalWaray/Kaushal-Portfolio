@@ -54,15 +54,38 @@ import {
                     </div>
   
                     {block.id === 'about' && block.content.profileImage && (
-                        <div className="mt-4">
-                            <Image
-                                src={block.content.profileImage}
-                                alt="Profile"
-                                width={150}
-                                height={150}
-                                className="rounded-full border-4 border-primary/50"
-                                data-ai-hint={block.content.profileImageHint}
-                            />
+                        <div className="mt-6">
+                          <div className="flex flex-col sm:flex-row items-center gap-6 rounded-lg border bg-card/50 p-6">
+                            <div className="relative w-40 h-40 shrink-0">
+                                <Image
+                                    src={block.content.profileImage}
+                                    alt="Profile NFT"
+                                    width={160}
+                                    height={160}
+                                    className="object-cover w-full h-full"
+                                    style={{
+                                      clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)'
+                                    }}
+                                    data-ai-hint={block.content.profileImageHint}
+                                />
+                                <div 
+                                  className="absolute inset-0" 
+                                  style={{
+                                    clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
+                                    boxShadow: 'inset 0 0 0 4px hsl(var(--primary)/0.5)',
+                                    pointerEvents: 'none'
+                                  }}
+                                />
+                            </div>
+                            <div className="flex flex-col text-center sm:text-left">
+                                <h4 className="font-headline text-xl text-primary">Kaushal Waray</h4>
+                                <p className="text-sm text-muted-foreground mt-1">Digital Identity</p>
+                                <div className="mt-4 space-y-1 font-mono text-xs">
+                                  <p><span className="text-muted-foreground">Token ID:</span> 7721</p>
+                                  <p><span className="text-muted-foreground">Owner:</span> 0x...dEaD</p>
+                                </div>
+                            </div>
+                          </div>
                         </div>
                     )}
   
