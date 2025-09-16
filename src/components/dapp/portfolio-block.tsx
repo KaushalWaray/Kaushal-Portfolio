@@ -33,42 +33,39 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
   return (
     <>
       <motion.div
-        className="w-full max-w-md group"
-        initial={{ opacity: 0.5, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        className="w-72 group"
+        whileHover={{ scale: 1.05 }}
+        transition={{ type: 'spring', stiffness: 300 }}
       >
         <div
           className={cn(
-            "relative w-full rounded-2xl border transition-all duration-300",
+            "relative w-full rounded-2xl border-2 backdrop-blur-xl transition-all duration-500",
             isMined
-              ? "border-primary/40 bg-card shadow-lg shadow-primary/10"
-              : "border-border/50 bg-card/60 backdrop-blur-sm"
+              ? "border-primary/70 bg-primary/10 shadow-2xl shadow-primary/20"
+              : "border-border/50 bg-card/50"
           )}
         >
-          <div className="p-5 flex items-center gap-5">
+          <div className="p-6 flex flex-col items-center text-center gap-4">
             <motion.div
               className={cn(
-                "w-14 h-14 rounded-full flex items-center justify-center transition-colors duration-300 shrink-0",
+                "w-16 h-16 rounded-full flex items-center justify-center transition-colors duration-300",
                 isMined ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
               )}
-              whileHover={{ scale: 1.1 }}
-              transition={{type: 'spring', stiffness: 300}}
             >
-              <Icon className="h-7 w-7" />
+              <Icon className="h-8 w-8" />
             </motion.div>
             <div className="flex-grow">
-                <h3 className="font-headline text-xl text-foreground">{block.title}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {isMined ? "Mined & Unlocked" : "Awaiting to be mined"}
+                <h3 className="font-headline text-2xl text-foreground">{block.title}</h3>
+                <p className="text-sm text-muted-foreground font-mono">
+                  {isMined ? "Mined & Unlocked" : "Awaiting Proof-of-Work"}
                 </p>
             </div>
-            <div className={`flex items-center gap-2 shrink-0 transition-colors duration-500 ${isMined ? 'text-primary' : 'text-muted-foreground'}`}>
+            <div className={`absolute top-3 right-3 flex items-center gap-2 shrink-0 transition-colors duration-500 ${isMined ? 'text-primary' : 'text-muted-foreground'}`}>
                 {isMined ? <Unlock className="h-4 w-4" /> : <Lock className="h-4 w-4" />}
             </div>
           </div>
 
-          <div className="px-5 pb-5">
+          <div className="px-6 pb-6">
             {isMined ? (
               <Button className="w-full" variant="outline" onClick={() => setIsContentModalOpen(true)}>
                 <Eye className="mr-2 h-4 w-4" />
@@ -77,14 +74,22 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
             ) : (
               <Button className="w-full font-bold" onClick={() => setIsMintModalOpen(true)}>
                 <DownloadCloud className="mr-2 h-4 w-4" />
-                Mint Block
+                Mine Block
               </Button>
             )}
           </div>
           
-          {isMined && (
-            <div className="absolute top-0 right-0 h-full w-1 bg-primary rounded-r-2xl" />
-          )}
+          <AnimatePresence>
+            {isMined && (
+              <motion.div 
+                className="absolute inset-0 border-2 border-primary/80 rounded-2xl"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                style={{ pointerEvents: 'none' }}
+              />
+            )}
+          </AnimatePresence>
 
         </div>
       </motion.div>

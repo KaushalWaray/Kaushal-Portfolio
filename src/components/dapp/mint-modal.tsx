@@ -118,10 +118,10 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="font-headline text-2xl">
-            Mint Block: {block.title}
+            Mine Block: {block.title}
           </DialogTitle>
           <DialogDescription>
-            Confirm the transaction to permanently add this block to your portfolio.
+            Confirm the transaction to permanently add this block to your personal chain.
           </DialogDescription>
         </DialogHeader>
         
@@ -156,7 +156,7 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
         
         {mintingState === 'mining' && (
             <div className="space-y-3 p-4">
-                <p className="text-center text-sm text-primary">Mining transaction...</p>
+                <p className="text-center text-sm text-primary">Mining transaction... (Proof-of-Work)</p>
                 <Progress value={progress} />
                 <p className="text-center text-xs text-muted-foreground font-mono">
                     Block hash: 0x{Array.from({ length: 16 }, () => "0123456789abcdef"[Math.floor(Math.random() * 16)]).join("")}...
@@ -175,7 +175,7 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
         <DialogFooter>
           {mintingState === "confirm" && (
             <Button className="w-full font-bold" onClick={handleMint}>
-              Confirm Mint
+              Confirm & Mine
             </Button>
           )}
            {mintingState === 'error' && (
