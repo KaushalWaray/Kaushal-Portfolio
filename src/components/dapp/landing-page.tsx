@@ -41,7 +41,7 @@ export function LandingPage() {
             Kaushal<span className="text-primary animate-glow"> Waray</span>
           </h1>
           <p className="mt-4 max-w-xl text-lg text-muted-foreground">
-            A full-stack developer with a passion for blockchain and decentralized technologies. Explore my work and mint my journey.
+            A passionate developer building the future of the decentralized web. Explore my journey and mint my progress.
           </p>
           <Button
             size="lg"
