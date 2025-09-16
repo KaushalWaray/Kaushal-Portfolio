@@ -59,12 +59,14 @@ export function OnboardingGuide() {
     }
   };
 
+  const Icon = currentStep.icon;
+
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <div className="flex justify-center items-center h-12 w-12 rounded-full bg-primary/10 mx-auto">
-            <current.icon className="h-6 w-6 text-primary" />
+            <Icon className="h-6 w-6 text-primary" />
           </div>
           <AlertDialogTitle className="font-headline text-center text-2xl pt-2">
             {currentStep.title}
