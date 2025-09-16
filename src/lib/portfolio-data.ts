@@ -4,7 +4,10 @@ import {
   IconAws,
   IconNextjs,
   IconReact,
+  IconShadcn,
   IconSolidity,
+  IconTailwind,
+  IconTs,
 } from '@/components/icons/tech-icons';
 
 export const portfolioData: Record<string, PortfolioBlock> = {
@@ -34,7 +37,10 @@ export const portfolioData: Record<string, PortfolioBlock> = {
           imageHint: 'decentralized cloud storage diagram',
           techStack: [
             { name: 'Next.js', icon: IconNextjs },
-            { name: 'PyTeal', icon: IconReact }, // Using react icon as placeholder for PyTeal
+            { name: 'React', icon: IconReact },
+            { name: 'TypeScript', icon: IconTs },
+            // Using react icon as placeholder for PyTeal
+            { name: 'PyTeal', icon: IconReact }, 
           ],
           repoUrl: '#',
         },
@@ -46,7 +52,10 @@ export const portfolioData: Record<string, PortfolioBlock> = {
           imageHint: 'devsecops pipeline diagram',
           techStack: [
             { name: 'Solidity', icon: IconSolidity },
-            { name: 'Hardhat', icon: IconReact }, // Using react icon as placeholder for hardhat
+            { name: 'TypeScript', icon: IconTs },
+            { name: 'AWS', icon: IconAws },
+             // Using react icon as placeholder for hardhat
+            { name: 'Hardhat', icon: IconReact },
           ],
           liveUrl: '#',
           repoUrl: '#',

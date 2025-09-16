@@ -13,6 +13,7 @@ import {
 import { useState } from "react";
 import { useAppContext } from "@/contexts/app-context";
 import { Wallet } from "lucide-react";
+import { motion } from 'framer-motion';
 
 export function LandingPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,24 +34,40 @@ export function LandingPage() {
     <>
       <div className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-background">
         <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.1)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.1)_1px,transparent_1px)] bg-[size:4rem_4rem] animate-grid [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
         </div>
 
         <div className="relative z-10 flex flex-col items-center text-center">
-          <h1 className="font-headline text-5xl font-bold md:text-7xl">
-            Kaushal<span className="text-primary animate-glow"> Waray</span>
-          </h1>
-          <p className="mt-4 max-w-xl text-lg text-muted-foreground">
-            A passionate developer building the future of the decentralized web. Explore my journey and mint my progress.
-          </p>
-          <Button
-            size="lg"
-            className="mt-8 font-bold"
-            onClick={() => setIsModalOpen(true)}
+          <motion.h1 
+            className="font-headline text-5xl font-bold md:text-7xl"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            <Wallet className="mr-2 h-5 w-5" />
-            Connect to Explore
-          </Button>
+            Kaushal<span className="text-primary animate-glow">.dev</span>
+          </motion.h1>
+          <motion.p 
+            className="mt-4 max-w-xl text-lg text-muted-foreground"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            A passionate developer building the future of the decentralized web. Explore my journey and mint my progress.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <Button
+              size="lg"
+              className="mt-8 font-bold"
+              onClick={() => setIsModalOpen(true)}
+            >
+              <Wallet className="mr-2 h-5 w-5" />
+              Connect to Explore
+            </Button>
+          </motion.div>
         </div>
       </div>
 
