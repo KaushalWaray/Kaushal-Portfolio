@@ -10,9 +10,6 @@ import {
   IconTailwind,
   IconTs,
 } from '@/components/icons/tech-icons';
-import { PlaceHolderImages } from './placeholder-images';
-
-const profileImage = PlaceHolderImages.find(p => p.id === 'kaushal-profile');
 
 export const portfolioData: Record<string, PortfolioBlock> = {
   about: {
@@ -21,8 +18,7 @@ export const portfolioData: Record<string, PortfolioBlock> = {
     content: {
       description:
         "My mission is to build the secure, decentralized future of the web. With hands-on experience in both blockchain development and cloud infrastructure, I build robust, end-to-end solutions. My work includes creating decentralized storage applications and engineering automated DevSecOps pipelines to secure smart contracts. As I complete my Master of Computer Applications, I'm eager to apply my skills in a dynamic role where I can contribute to cutting-edge blockchain and Web3 projects.",
-      profileImage: profileImage?.imageUrl,
-      profileImageHint: profileImage?.imageHint,
+      profileImage: '/Profile.jpg',
     },
     complexity: 'Simple text and image block.',
     engagement: 'Low user interaction, primarily for reading.',

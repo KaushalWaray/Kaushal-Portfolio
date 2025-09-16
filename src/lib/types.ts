@@ -28,7 +28,6 @@ export type PortfolioBlock = {
   content: {
     description: string;
     profileImage?: string;
-    profileImageHint?: string;
     projects?: Project[];
     skills?: { category: string; list: string[] }[];
     contact?: { method: string; value: string; href: string, icon: LucideIcon }[];
