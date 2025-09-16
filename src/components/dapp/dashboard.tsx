@@ -6,8 +6,9 @@ import { portfolioData } from "@/lib/portfolio-data";
 import type { PortfolioBlockId } from "@/lib/types";
 import { useAppContext } from "@/contexts/app-context";
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { OnboardingGuide } from "./onboarding-guide";
+import { RewardModal } from "./reward-modal";
 
 const contentBlockIds: PortfolioBlockId[] = ["about", "projects", "skills", "education", "certifications", "contact"];
 
@@ -36,13 +37,25 @@ const MouseTrackedSpotlight = () => {
 export function Dashboard() {
   const [isClient, setIsClient] = useState(false);
   const { state } = useAppContext();
+  const [showReward, setShowReward] = useState(false);
+  const [hasShownReward, setHasShownReward] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  const contentBlocks = contentBlockIds.map(id => portfolioData[id]);
-  const doubledContentBlocks = [...contentBlocks, ...contentBlocks];
+  const contentBlocks = useMemo(() => contentBlockIds.map(id => portfolioData[id]), []);
+
+  useEffect(() => {
+    const allBlocksMined = contentBlocks.every(block => state.mintedBlocks.includes(block.id));
+    if (allBlocksMined && !hasShownReward) {
+      setShowReward(true);
+      setHasShownReward(true);
+    }
+  }, [state.mintedBlocks, contentBlocks, hasShownReward]);
+
+
+  const doubledContentBlocks = useMemo(() => [...contentBlocks, ...contentBlocks], [contentBlocks]);
   const totalBlocks = contentBlocks.length;
   const blockWidth = 352; // w-72 (288px) + mx-8 (64px)
   const chainWidth = totalBlocks * blockWidth;
@@ -98,6 +111,7 @@ export function Dashboard() {
         </div>
       </main>
       {!state.hasCompletedOnboarding && state.isAuthenticated && <OnboardingGuide />}
+      <RewardModal isOpen={showReward} onOpenChange={setShowReward} />
     </div>
   );
 }
