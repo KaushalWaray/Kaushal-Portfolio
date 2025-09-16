@@ -16,7 +16,7 @@ export const portfolioData: Record<string, PortfolioBlock> = {
     title: 'About Me',
     content: {
       description:
-        'My mission is to build the secure, decentralized future of the web. With hands-on experience in both blockchain development and cloud infrastructure, I build robust, end-to-end solutions. My work includes creating decentralized storage applications and engineering automated DevSecOps pipelines to secure smart contracts. As I complete my Master of Computer Applications, I\'m eager to apply my skills in a dynamic role where I can contribute to cutting-edge blockchain and Web3 projects.',
+        "My mission is to build the secure, decentralized future of the web. With hands-on experience in both blockchain development and cloud infrastructure, I build robust, end-to-end solutions. My work includes creating decentralized storage applications and engineering automated DevSecOps pipelines to secure smart contracts. As I complete my Master of Computer Applications, I'm eager to apply my skills in a dynamic role where I can contribute to cutting-edge blockchain and Web3 projects.",
       profileImage: "/Profile.jpg",
       profileImageHint: "professional developer portrait",
     },
@@ -30,11 +30,9 @@ export const portfolioData: Record<string, PortfolioBlock> = {
       description: 'Here are some of the projects I am proud to have worked on.',
       projects: [
         {
-          title: 'MetaDrive: Decentralized File Storage Sharing Wallet',
+          title: 'DecStor: Decentralized File Storage & Sharing Wallet',
           description:
-            'Engineered a decentralized storage app for Algorand. Utilized IPFS (Pinata) for file storage and a PyTeal contract for on-chain records. Implemented PIN-based encryption to secure wallet mnemonics.',
-          imageUrl: 'https://i.imgur.com/8a3jJ2G.png',
-          imageHint: 'decentralized cloud storage diagram',
+            "DecStor is a decentralized file storage and sharing wallet designed to give users true ownership and control over their digital data. It serves as a secure, user-owned alternative to traditional centralized cloud storage services like Google Drive and Dropbox.\n\nThe project's architecture uses the Algorand blockchain as a high-speed 'logic layer' to manage user identity and create a permanent, verifiable 'proof-of-share' for every file transaction. For the actual storage, it leverages the IPFS network to ensure files are stored in a distributed and censorship-resistant manner.\n\nThe current version is a functional prototype live on the Algorand Testnet, where users can create wallets, upload files to a personal 'Vault,' and securely share them with other Algorand users. The long-term vision is to build a full-scale product with an open-core business model, offering premium features for teams and businesses.",
           techStack: [
             { name: 'Next.js', icon: IconNextjs },
             { name: 'React', icon: IconReact },
@@ -48,8 +46,6 @@ export const portfolioData: Record<string, PortfolioBlock> = {
           title: 'Automated DevSecOps Pipeline for Smart Contracts',
           description:
             'Built a CI/CD pipeline (GitHub Actions, Hardhat) for automated contract deployment. Integrated Slither for automated pre-deployment security vulnerability scanning. Orchestrated end-to-end automation: linting, testing, deploying to Sepolia.',
-          imageUrl: 'https://i.imgur.com/e2a1oD8.png',
-          imageHint: 'devsecops pipeline diagram',
           techStack: [
             { name: 'Solidity', icon: IconSolidity },
             { name: 'TypeScript', icon: IconTs },

@@ -10,8 +10,6 @@ export type TechStack = {
 export type Project = {
   title: string;
   description: string;
-  imageUrl: string;
-  imageHint: string;
   techStack: TechStack[];
   liveUrl?: string;
   repoUrl?: string;

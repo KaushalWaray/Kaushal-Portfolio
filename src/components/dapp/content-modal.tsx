@@ -51,7 +51,7 @@ import {
             <div className="pr-6">
                 <div className="mt-6">
                     <h3 className="font-headline text-lg mb-2">Content</h3>
-                    <div className="prose prose-invert max-w-none text-muted-foreground prose-p:text-base">
+                    <div className="prose prose-invert max-w-none text-muted-foreground prose-p:text-base whitespace-pre-wrap">
                         <p>{block.content.description}</p>
                     </div>
   
@@ -93,9 +93,8 @@ import {
   
                     {block.id === 'projects' && block.content.projects?.map((project, index) => (
                         <div key={index} className="mt-6 rounded-lg border bg-card/50 p-4">
-                           <Image src={project.imageUrl} alt={project.title} width={600} height={400} className="rounded-md mb-4" data-ai-hint={project.imageHint}/>
                            <h4 className="font-headline text-xl">{project.title}</h4>
-                           <p className="mt-1 text-sm text-muted-foreground">{project.description}</p>
+                           <p className="mt-1 text-sm text-muted-foreground whitespace-pre-wrap">{project.description}</p>
                            <div className="mt-4">
                                 <h5 className="text-sm font-semibold mb-2">Tech Stack:</h5>
                                 <div className="flex flex-wrap gap-2">
@@ -129,7 +128,6 @@ import {
                             <Link href={contact.href} target="_blank" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{contact.value}</Link>
                         </div>
                     ))}
-  
                 </div>
 
                 <div className="mt-8 rounded-lg border bg-card/50 p-4">
