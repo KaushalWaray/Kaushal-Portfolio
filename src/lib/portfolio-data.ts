@@ -23,8 +23,8 @@ export const portfolioData: Record<string, PortfolioBlock> = {
     content: {
       description:
         "Motivated individual with a strong interest in blockchain technology and cloud computing. Actively pursuing a Master of Computer Applications degree, showcasing commitment to advanced technical knowledge and development. Dedicated to exploring innovative solutions and emerging technologies in the digital space. Seeking opportunities to contribute passion for blockchain and cloud systems to a dynamic and forward-thinking team.",
-      profileImage: profileImage?.imageUrl,
-      profileImageHint: profileImage?.imageHint,
+      profileImage: "https://i.imgur.com/t8yG4g4.jpeg",
+      profileImageHint: "professional developer portrait",
     },
     complexity: 'Simple text and image block.',
     engagement: 'Low user interaction, primarily for reading.',
