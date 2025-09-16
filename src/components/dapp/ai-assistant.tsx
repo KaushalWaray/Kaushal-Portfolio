@@ -110,29 +110,6 @@ export function AiAssistant() {
           <ScrollArea className="h-full" ref={scrollAreaRef}>
             <div className="p-4 space-y-6">
                 <AnimatePresence>
-                    {messages.length === 0 && (
-                         <motion.div 
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="text-sm text-center text-muted-foreground p-4 bg-secondary/30 rounded-lg"
-                         >
-                            <p className="font-semibold mb-3">Don't know where to start?</p>
-                            <div className="flex flex-col gap-2">
-                                {suggestedQuestions.map(q => (
-                                    <Button
-                                      key={q}
-                                      variant="outline"
-                                      size="sm"
-                                      className="h-auto justify-start py-2 text-left"
-                                      onClick={(e) => handleSubmit(e, q)}
-                                    >
-                                        <Feather className="mr-2 h-3.5 w-3.5 shrink-0" />
-                                        <span>{q}</span>
-                                    </Button>
-                                ))}
-                            </div>
-                        </motion.div>
-                    )}
                     {messages.map((message, index) => (
                     <motion.div
                         key={index}
@@ -166,6 +143,31 @@ export function AiAssistant() {
                         )}
                     </motion.div>
                     ))}
+                     {(messages.length === 0 || !isLoading) && (
+                         <motion.div 
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-sm text-center text-muted-foreground p-4 bg-secondary/30 rounded-lg"
+                         >
+                            <p className="font-semibold mb-3">
+                               {messages.length > 0 ? "Ask another question:" : "Don't know where to start?"}
+                            </p>
+                            <div className="flex flex-col gap-2">
+                                {suggestedQuestions.map(q => (
+                                    <Button
+                                      key={q}
+                                      variant="outline"
+                                      size="sm"
+                                      className="h-auto justify-start py-2 text-left"
+                                      onClick={(e) => handleSubmit(e, q)}
+                                    >
+                                        <Feather className="mr-2 h-3.5 w-3.5 shrink-0" />
+                                        <span>{q}</span>
+                                    </Button>
+                                ))}
+                            </div>
+                        </motion.div>
+                    )}
                     {isLoading && (
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
