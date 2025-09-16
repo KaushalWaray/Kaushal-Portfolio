@@ -16,7 +16,7 @@ export const portfolioData: Record<string, PortfolioBlock> = {
     title: 'About Me',
     content: {
       description:
-        "I'm a developer passionate about building the secure, decentralized future of the web. With hands-on experience in both blockchain development and cloud infrastructure, I build robust, end-to-end solutions. My work includes creating decentralized storage applications and engineering automated DevSecOps pipelines to secure smart contracts. As I complete my Master of Computer Applications, I'm eager to apply my skills in a dynamic role where I can contribute to cutting-edge blockchain and Web3 projects.",
+        'My mission is to build the secure, decentralized future of the web. With hands-on experience in both blockchain development and cloud infrastructure, I build robust, end-to-end solutions. My work includes creating decentralized storage applications and engineering automated DevSecOps pipelines to secure smart contracts. As I complete my Master of Computer Applications, I\'m eager to apply my skills in a dynamic role where I can contribute to cutting-edge blockchain and Web3 projects.',
       profileImage: "/Profile.jpg",
       profileImageHint: "professional developer portrait",
     },
