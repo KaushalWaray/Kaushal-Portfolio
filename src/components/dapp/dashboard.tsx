@@ -55,13 +55,14 @@ export function Dashboard() {
   return (
     <div className="min-h-screen w-full bg-background flex flex-col">
       <Header />
-      <main className="flex-1 w-full relative flex flex-col items-center justify-center py-12">
+      <main className="flex-1 w-full relative flex flex-col items-center justify-center py-12 overflow-x-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--secondary)/0.4)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--secondary)/0.4)_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
         </div>
         <MouseTrackedSpotlight />
 
         <div className="relative z-20 flex flex-col items-center justify-center w-full h-full">
+          <div className="overflow-hidden">
             <motion.div
                 className="flex"
                 initial={{ x: 0 }}
@@ -88,6 +89,7 @@ export function Dashboard() {
                     ))}
                 </div>
             </motion.div>
+          </div>
         </div>
       </main>
       {!state.hasCompletedOnboarding && state.isAuthenticated && <OnboardingGuide />}
