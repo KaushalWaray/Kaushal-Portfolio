@@ -6,8 +6,8 @@ import { useAppContext } from "@/contexts/app-context";
 import { Droplets } from "lucide-react";
 import { useState, useEffect } from "react";
 
-const COOLDOWN_SECONDS = 60;
-const CLAIM_AMOUNT = 1.0;
+const COOLDOWN_SECONDS = 30; // Reduced cooldown
+const CLAIM_AMOUNT = 10.0; // Increased claim amount
 
 export function FaucetButton() {
   const { dispatch } = useAppContext();

@@ -53,7 +53,13 @@ function appReducer(state: AppState, action: Action): AppState {
         walletBalance: action.payload.balance,
       };
     case "DISCONNECT_WALLET":
-      return { ...initialState, isAuthenticated: false, isInitialized: true };
+      // Preserve minted blocks on disconnect to show progress
+      return { 
+        ...initialState, 
+        isAuthenticated: false, 
+        isInitialized: true,
+        mintedBlocks: state.mintedBlocks,
+       };
     case "CLAIM_FAUCET":
       return {
         ...state,
@@ -106,6 +112,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         const stateToSave = {
           ...state,
           gasPrice: undefined, // Don't persist gas price
+          isInitialized: undefined, // Don't persist initialization status
         };
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(stateToSave));
       } catch (error) {
