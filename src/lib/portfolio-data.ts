@@ -33,7 +33,7 @@ export const portfolioData: Record<string, PortfolioBlock> = {
           title: 'MetaDrive: Decentralized File Storage Sharing Wallet',
           description:
             'Engineered a decentralized storage app for Algorand. Utilized IPFS (Pinata) for file storage and a PyTeal contract for on-chain records. Implemented PIN-based encryption to secure wallet mnemonics.',
-          imageUrl: 'https://i.imgur.com/yV9n8J7.png',
+          imageUrl: 'https://i.imgur.com/8a3jJ2G.png',
           imageHint: 'decentralized cloud storage diagram',
           techStack: [
             { name: 'Next.js', icon: IconNextjs },
@@ -48,7 +48,7 @@ export const portfolioData: Record<string, PortfolioBlock> = {
           title: 'Automated DevSecOps Pipeline for Smart Contracts',
           description:
             'Built a CI/CD pipeline (GitHub Actions, Hardhat) for automated contract deployment. Integrated Slither for automated pre-deployment security vulnerability scanning. Orchestrated end-to-end automation: linting, testing, deploying to Sepolia.',
-          imageUrl: 'https://i.imgur.com/yV9n8J7.png',
+          imageUrl: 'https://i.imgur.com/e2a1oD8.png',
           imageHint: 'devsecops pipeline diagram',
           techStack: [
             { name: 'Solidity', icon: IconSolidity },
