@@ -42,7 +42,7 @@ export function LandingPage() {
             className="font-headline text-5xl font-bold md:text-7xl"
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
           >
             Kaushal<span className="text-primary animate-glow">.dev</span>
           </motion.h1>
@@ -50,14 +50,14 @@ export function LandingPage() {
             className="mt-4 max-w-xl text-lg text-muted-foreground"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
           >
             A passionate developer building the future of the decentralized web. Explore my journey and mint my progress.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.4, type: 'spring', stiffness: 200, damping: 25 }}
           >
             <Button
               size="lg"
