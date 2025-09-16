@@ -10,10 +10,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { useAppContext } from "@/contexts/app-context";
 import type { PortfolioBlock } from "@/lib/types";
-import { Lock, Unlock, Eye, Link as LinkIcon } from "lucide-react";
+import { Lock, Unlock, Eye, Link as LinkIcon, DownloadCloud } from "lucide-react";
 import { useState } from "react";
 import { MintModal } from "./mint-modal";
 import { ContentModal } from "./content-modal";
+import { motion } from "framer-motion";
 
 interface PortfolioBlockProps {
   block: PortfolioBlock;
@@ -27,12 +28,17 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
 
   return (
     <>
-      <div className="w-96">
+      <motion.div 
+        className="w-96"
+        initial={{ opacity: 0.5, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <Card
-          className={`relative overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-primary/20 ${
+          className={`relative overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-primary/20 ${
             isMined
               ? "border-primary/50 bg-card shadow-lg shadow-primary/10"
-              : "bg-card/80"
+              : "border-border/50 bg-card/60 backdrop-blur-sm"
           }`}
         >
           <CardHeader>
@@ -41,21 +47,14 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
                 <CardTitle className="font-headline text-2xl">{block.title}</CardTitle>
                 <CardDescription>
                   {isMined
-                    ? "This block has been mined and its content is unlocked."
-                    : "Mint this block to reveal its content on the portfolio chain."}
+                    ? "Mined & Unlocked"
+                    : "Awaiting to be mined on-chain"}
                 </CardDescription>
               </div>
-              {isMined ? (
-                <div className="flex items-center gap-2 text-primary shrink-0 ml-4">
-                  <Unlock className="h-5 w-5" />
-                  <span className="text-sm font-medium">Mined</span>
-                </div>
-              ) : (
-                <div className="flex items-center gap-2 text-muted-foreground shrink-0 ml-4">
-                  <Lock className="h-5 w-5" />
-                  <span className="text-sm font-medium">Unmined</span>
-                </div>
-              )}
+              <div className={`flex items-center gap-2 shrink-0 ml-4 transition-colors duration-500 ${isMined ? 'text-primary' : 'text-muted-foreground'}`}>
+                {isMined ? <Unlock className="h-5 w-5" /> : <Lock className="h-5 w-5" />}
+                <span className="text-sm font-medium">{isMined ? "Mined" : "Unmined"}</span>
+              </div>
             </div>
           </CardHeader>
           <CardContent>
@@ -66,17 +65,23 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
               </Button>
             ) : (
               <Button className="w-full font-bold" onClick={() => setIsMintModalOpen(true)}>
+                <DownloadCloud className="mr-2 h-4 w-4" />
                 Mint Block
               </Button>
             )}
           </CardContent>
           {isMined && (
-            <div className="absolute top-2 right-2 flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary">
+            <motion.div 
+              className="absolute top-2 right-2 flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary"
+              initial={{scale: 0, rotate: -180}}
+              animate={{scale: 1, rotate: 0}}
+              transition={{delay: 0.3, type: 'spring'}}
+            >
                 <LinkIcon className="h-4 w-4"/>
-            </div>
+            </motion.div>
           )}
         </Card>
-      </div>
+      </motion.div>
       
       {isMintModalOpen && (
          <MintModal
