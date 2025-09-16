@@ -1,3 +1,4 @@
+
 import type { PortfolioBlock } from './types';
 import { Github, Linkedin, Mail } from 'lucide-react';
 import {
@@ -134,7 +135,30 @@ export const portfolioData: Record<string, PortfolioBlock> = {
       description:
         "I am committed to continuous learning and professional development. Here are some of my recent certifications.",
       certifications: [
-        // User will provide details later
+        {
+          title: 'Chainlink Fundamentals',
+          issuer: 'Cyfrin Updraft',
+          date: 'August 2025',
+          credentialUrl: 'https://profiles.cyfrin.io/u/kaushalwaray/achievements/chainlink-fundamentals',
+        },
+        {
+          title: 'Blockchain Deep Dive',
+          issuer: 'Binance Academy',
+          date: 'July 2025',
+          credentialUrl: 'https://academy.binance.com/en/courses/certificate/194184af3d92290ca4f780ca2172a39c860204d8d3b23bcb535a32df90ee5d0e',
+        },
+        {
+          title: 'Solidity Smart Contract Development',
+          issuer: 'Cyfrin Updraft',
+          date: 'July 2025',
+          credentialUrl: 'https://updraft.cyfrin.io/courses/solidity',
+        },
+        {
+          title: 'Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate',
+          issuer: 'Oracle',
+          date: 'September 2025',
+          credentialUrl: 'https://catalog-education.oracle.com/pls/certview/sharebadge?id=395904DA2EEFF5ED10CC4C765D25625AB0A1B0F6F71FA472DBA5A63F7EC047E3',
+        }
       ],
     },
     complexity:
