@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -9,6 +10,7 @@ import { portfolioAssistant } from '@/ai/flows/portfolio-assistant-flow';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAppContext } from '@/contexts/app-context';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 
 type Message = {
   role: 'user' | 'assistant';
@@ -93,10 +95,17 @@ export function AiAssistant() {
             </div>
             <ScrollArea className="flex-1 p-4">
               <div className="space-y-4">
+                {messages.length === 0 && (
+                  <div className="text-center text-sm text-muted-foreground p-8">
+                    <Sparkles className="mx-auto h-8 w-8 mb-2" />
+                    <p>Ask me anything about Kaushal's portfolio!</p>
+                    <p className="text-xs mt-2">(e.g., "What technologies does he know?" or "Tell me about the DecStor project.")</p>
+                  </div>
+                )}
                 {messages.map((msg, index) => (
                   <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                     <div className={`p-3 rounded-2xl max-w-[80%] ${msg.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-secondary'}`}>
-                      <p className="text-sm">{msg.content}</p>
+                      <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
                     </div>
                   </div>
                 ))}
@@ -123,7 +132,7 @@ export function AiAssistant() {
                     }
                 }}
               />
-              <Button onClick={handleSend} disabled={isLoading} size="icon" className="h-10 w-10 shrink-0">
+              <Button onClick={handleSend} disabled={isLoading || !input.trim()} size="icon" className="h-10 w-10 shrink-0">
                 <Send className="h-4 w-4" />
               </Button>
             </div>
@@ -135,14 +144,25 @@ export function AiAssistant() {
         animate={{ scale: 1 }}
         transition={{ delay: 0.5, type: 'spring', stiffness: 260, damping: 20 }}
       >
-        <Button
-            onClick={() => setIsOpen(!isOpen)}
-            size="lg"
-            variant={isOpen ? 'secondary' : 'default'}
-            className="rounded-full shadow-lg w-16 h-16"
-            >
-            {isOpen ? <X className="h-7 w-7" /> : <Bot className="h-7 w-7" />}
-        </Button>
+        <TooltipProvider>
+            <Tooltip>
+                <TooltipTrigger asChild>
+                    <Button
+                        onClick={() => setIsOpen(!isOpen)}
+                        size="lg"
+                        variant={isOpen ? 'secondary' : 'default'}
+                        className="rounded-full shadow-lg w-16 h-16"
+                        >
+                        {isOpen ? <X className="h-7 w-7" /> : <Sparkles className="h-7 w-7" />}
+                    </Button>
+                </TooltipTrigger>
+                {!isOpen && (
+                    <TooltipContent>
+                        <p>AI Assistant</p>
+                    </TooltipContent>
+                )}
+            </Tooltip>
+        </TooltipProvider>
       </motion.div>
     </div>
   );
