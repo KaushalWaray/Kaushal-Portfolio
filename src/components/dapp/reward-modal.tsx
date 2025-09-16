@@ -150,8 +150,8 @@ export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
                             <h3 className="font-headline text-lg text-primary">Proof of Exploration</h3>
                             <p className="text-xs text-muted-foreground mt-1">Issued to Explorer</p>
                         </div>
-                        <div className="w-full text-left font-mono text-[10px] space-y-1 z-10">
-                            <p className="truncate"><span className="text-muted-foreground">Issuer:</span> Kaushal.dev</p>
+                        <div className="w-full text-center font-mono text-[10px] space-y-1 z-10">
+                            <p><span className="text-muted-foreground">Issuer:</span> Kaushal.dev</p>
                             <p className="truncate"><span className="text-muted-foreground">Tx Hash:</span> {truncatedHash}</p>
                         </div>
                     </div>
