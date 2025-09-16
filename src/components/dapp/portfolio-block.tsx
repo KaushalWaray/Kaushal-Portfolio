@@ -7,7 +7,7 @@ import { Lock, Unlock, Eye, DownloadCloud, LinkIcon, FileText, Briefcase, Star, 
 import { useState, useMemo } from "react";
 import { MintModal } from "./mint-modal";
 import { ContentModal } from "./content-modal";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface PortfolioBlockProps {
