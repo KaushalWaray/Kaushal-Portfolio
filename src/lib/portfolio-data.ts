@@ -54,7 +54,6 @@ export const portfolioData: Record<string, PortfolioBlock> = {
              // Using react icon as placeholder for hardhat
             { name: 'Hardhat', icon: IconReact },
           ],
-          liveUrl: '#',
           repoUrl: '#',
         },
       ],
