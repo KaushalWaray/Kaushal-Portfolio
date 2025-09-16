@@ -39,7 +39,7 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
       >
         <div
           className={cn(
-            "relative w-full rounded-2xl border-2 backdrop-blur-xl transition-all duration-500 h-[204px]",
+            "relative w-full rounded-lg border-2 backdrop-blur-xl transition-all duration-500 h-[204px]",
             isMined
               ? "border-accent/70 bg-accent/10 shadow-2xl shadow-accent/20"
               : "border-border/50 bg-card/50"
@@ -48,7 +48,7 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
           <div className="p-6 flex flex-col items-center text-center gap-4">
             <motion.div
               className={cn(
-                "w-16 h-16 rounded-full flex items-center justify-center transition-colors duration-300",
+                "w-16 h-16 rounded-lg flex items-center justify-center transition-colors duration-300",
                 isMined ? "bg-accent text-accent-foreground" : "bg-muted text-muted-foreground"
               )}
             >
@@ -82,7 +82,7 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
           <AnimatePresence>
             {isMined && (
               <motion.div 
-                className="absolute inset-0 border-2 border-accent/80 rounded-2xl"
+                className="absolute inset-0 border-2 border-accent/80 rounded-lg"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.2 }}

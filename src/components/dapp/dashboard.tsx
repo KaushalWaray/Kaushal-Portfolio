@@ -41,7 +41,7 @@ export function Dashboard() {
 
   const contentBlocks = contentBlockIds.map(id => portfolioData[id]);
   const totalBlocks = contentBlocks.length;
-  const blockWidth = 352; // 320px width + 32px gap
+  const blockWidth = 352; // 288px width + 64px gap
   const chainWidth = totalBlocks * blockWidth;
 
   const chainVariants = {
@@ -79,11 +79,13 @@ export function Dashboard() {
                     animate="animate"
                 >
                     {[...contentBlocks, ...contentBlocks].map((block, index) => (
-                        <div key={`${block.id}-${index}`} className="flex items-center px-4">
+                        <div key={`${block.id}-${index}`} className="flex items-center px-8">
                             <PortfolioBlockDisplay block={portfolioData[block.id as PortfolioBlockId]} />
-                            <div className="w-8 h-1 bg-primary/30 mx-4 relative overflow-hidden">
-                                <div className="absolute top-0 left-0 h-full w-full bg-primary/30 connector-line"/>
-                            </div>
+                            <svg width="64" height="24" viewBox="0 0 64 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-16 h-6 mx-4 text-primary/30">
+                              <path d="M0 12L10 12M54 12L64 12M22 12L42 12" stroke="currentColor" strokeWidth="2"/>
+                              <path className="connector-line" d="M10 2L22 2V22H10V18C10 14.6863 12.6863 12 16 12C12.6863 12 10 9.31371 10 6V2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path className="connector-line" d="M54 2L42 2V22H54V18C54 14.6863 51.3137 12 48 12C51.3137 12 54 9.31371 54 6V2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
                         </div>
                     ))}
                 </motion.div>
