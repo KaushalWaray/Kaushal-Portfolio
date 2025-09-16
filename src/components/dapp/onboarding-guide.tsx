@@ -2,16 +2,16 @@
 
 import { useState } from "react";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { useAppContext } from "@/contexts/app-context";
-import { Bot, DownloadCloud, Droplets, Fuel, Sparkles, Wallet } from "lucide-react";
+import { Bot, DownloadCloud, Droplets, Wallet } from "lucide-react";
 
 type OnboardingStep = {
   title: string;
@@ -62,30 +62,30 @@ export function OnboardingGuide() {
   const Icon = currentStep.icon;
 
   return (
-    <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-      <AlertDialogContent>
-        <AlertDialogHeader>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent>
+        <DialogHeader>
           <div className="flex justify-center items-center h-12 w-12 rounded-full bg-primary/10 mx-auto">
             <Icon className="h-6 w-6 text-primary" />
           </div>
-          <AlertDialogTitle className="font-headline text-center text-2xl pt-2">
+          <DialogTitle className="font-headline text-center text-2xl pt-2">
             {currentStep.title}
-          </AlertDialogTitle>
-          <AlertDialogDescription className="text-center text-base">
+          </DialogTitle>
+          <DialogDescription className="text-center text-base">
             {currentStep.description}
-          </AlertDialogDescription>
-        </AlertDialogHeader>
+          </DialogDescription>
+        </DialogHeader>
         <div className="flex justify-center gap-2 mt-2">
             {steps.map((_, index) => (
                 <div key={index} className={`h-2 w-2 rounded-full transition-colors ${index === stepIndex ? 'bg-primary' : 'bg-muted'}`} />
             ))}
         </div>
-        <AlertDialogFooter className="mt-4">
-          <AlertDialogAction className="w-full font-bold" onClick={handleNext}>
+        <DialogFooter className="mt-4">
+          <Button className="w-full font-bold" onClick={handleNext}>
             {isLastStep ? "Start Exploring" : "Next"}
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
