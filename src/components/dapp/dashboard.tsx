@@ -46,11 +46,6 @@ export function Dashboard() {
         </div>
 
         <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
-            <div className="text-center p-4 rounded-lg bg-primary/10 border border-primary/30 backdrop-blur-sm text-primary mb-16">
-                <h2 className="font-headline text-xl">The Genesis Chain</h2>
-                <p className="text-sm ">Your personalized portfolio blockchain.</p>
-            </div>
-
             <div className="w-full h-96 flex items-center justify-center">
                 <motion.div
                     className="flex items-center"
