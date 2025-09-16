@@ -20,6 +20,7 @@ interface AppState {
   walletBalance: number;
   mintedBlocks: PortfolioBlockId[];
   gasPrice: number;
+  hasCompletedOnboarding: boolean;
 }
 
 const initialState: AppState = {
@@ -29,6 +30,7 @@ const initialState: AppState = {
   walletBalance: 0,
   mintedBlocks: [],
   gasPrice: 0,
+  hasCompletedOnboarding: false,
 };
 
 // Actions
@@ -38,7 +40,8 @@ type Action =
   | { type: "DISCONNECT_WALLET" }
   | { type: "CLAIM_FAUCET"; payload: { amount: number } }
   | { type: "MINT_BLOCK"; payload: { blockId: PortfolioBlockId; cost: number } }
-  | { type: "SET_GAS_PRICE"; payload: number };
+  | { type: "SET_GAS_PRICE"; payload: number }
+  | { type: "COMPLETE_ONBOARDING" };
 
 // Reducer
 function appReducer(state: AppState, action: Action): AppState {
@@ -54,7 +57,13 @@ function appReducer(state: AppState, action: Action): AppState {
       };
     case "DISCONNECT_WALLET":
       localStorage.removeItem(LOCAL_STORAGE_KEY);
-      return { ...initialState, isInitialized: true, isAuthenticated: false };
+      // Reset all state except for onboarding status
+      return { 
+        ...initialState, 
+        isInitialized: true, 
+        isAuthenticated: false,
+        hasCompletedOnboarding: state.hasCompletedOnboarding 
+      };
     case "CLAIM_FAUCET":
       return {
         ...state,
@@ -71,6 +80,8 @@ function appReducer(state: AppState, action: Action): AppState {
       };
     case "SET_GAS_PRICE":
       return { ...state, gasPrice: action.payload };
+    case "COMPLETE_ONBOARDING":
+      return { ...state, hasCompletedOnboarding: true };
     default:
       return state;
   }
@@ -109,6 +120,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
           walletAddress: state.walletAddress,
           walletBalance: state.walletBalance,
           mintedBlocks: state.mintedBlocks,
+          hasCompletedOnboarding: state.hasCompletedOnboarding,
         };
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(stateToSave));
       } catch (error) {

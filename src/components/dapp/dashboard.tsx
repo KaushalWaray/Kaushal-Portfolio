@@ -8,6 +8,7 @@ import { useAppContext } from "@/contexts/app-context";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import { AiAssistant } from "./ai-assistant";
+import { OnboardingGuide } from "./onboarding-guide";
 
 const contentBlockIds: PortfolioBlockId[] = ["about", "projects", "skills", "certifications", "contact"];
 
@@ -35,6 +36,7 @@ const MouseTrackedSpotlight = () => {
 
 export function Dashboard() {
   const [isClient, setIsClient] = useState(false);
+  const { state } = useAppContext();
 
   useEffect(() => {
     setIsClient(true);
@@ -92,6 +94,7 @@ export function Dashboard() {
             </div>
         </div>
       </main>
+      {!state.hasCompletedOnboarding && state.isAuthenticated && <OnboardingGuide />}
       <AiAssistant />
     </div>
   );
