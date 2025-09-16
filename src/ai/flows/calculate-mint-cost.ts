@@ -41,6 +41,44 @@ const CalculateMintCostOutputSchema = z.object({
 });
 export type CalculateMintCostOutput = z.infer<typeof CalculateMintCostOutputSchema>;
 
+const costCalculationTool = ai.defineTool(
+    {
+      name: 'costCalculationTool',
+      description: 'Calculates the mint cost based on complexity and engagement scores.',
+      inputSchema: z.object({
+        complexityScore: z.number().describe('A score from 1-10 for content complexity.'),
+        engagementScore: z.number().describe('A score from 1-10 for user engagement potential.'),
+      }),
+      outputSchema: z.object({
+        cost: z.number().describe('The calculated cost.')
+      }),
+    },
+    async ({ complexityScore, engagementScore }) => {
+        // A more sophisticated cost formula
+        const cost = (complexityScore * 0.15) + (engagementScore * 0.1) + Math.random() * 0.5 + 1.0;
+        return { cost };
+    }
+);
+
+
+const calculateMintCostPrompt = ai.definePrompt({
+    name: 'calculateMintCostPrompt',
+    input: { schema: CalculateMintCostInputSchema },
+    output: { schema: CalculateMintCostOutputSchema },
+    tools: [costCalculationTool],
+    prompt: `You are a chain economist. Your job is to determine the mint cost for a new portfolio block.
+    
+    Evaluate the block's complexity and engagement potential. Assign a score from 1 (lowest) to 10 (highest) for both.
+    Then, use the costCalculationTool to get the final mint cost.
+
+    Block Type: {{blockType}}
+    Content Complexity: "{{contentComplexity}}"
+    User Engagement Potential: "{{userEngagementPotential}}"
+    
+    Return only the final mintCost.`,
+});
+
+
 export async function calculateMintCost(input: CalculateMintCostInput): Promise<CalculateMintCostOutput> {
   return calculateMintCostFlow(input);
 }
@@ -52,11 +90,10 @@ const calculateMintCostFlow = ai.defineFlow(
     outputSchema: CalculateMintCostOutputSchema,
   },
   async (input) => {
-    // Dummy implementation: calculate cost based on string lengths of complexity and engagement potential
-    const complexityScore = input.contentComplexity.length;
-    const engagementScore = input.userEngagementPotential.length;
-    const mintCost = complexityScore * 0.1 + engagementScore * 0.05 + 1.0;
-    
-    return { mintCost };
+    const { output } = await calculateMintCostPrompt(input);
+    if (!output) {
+      throw new Error('The AI failed to calculate a mint cost.');
+    }
+    return output;
   }
 );

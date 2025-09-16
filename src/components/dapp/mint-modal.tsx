@@ -134,7 +134,7 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
 
         {mintingState === 'confirm' && (
             <div className="space-y-4">
-                <div className="rounded-lg border bg-card p-4">
+                <div className="rounded-lg border bg-card/50 p-4">
                     <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">Base Fee</span>
                         <span className="font-mono">{baseCost.toFixed(4)} pETH</span>
