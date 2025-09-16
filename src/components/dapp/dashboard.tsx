@@ -9,6 +9,7 @@ import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import { AiAssistant } from "./ai-assistant";
 import { OnboardingGuide } from "./onboarding-guide";
+import { RewardModal } from "./reward-modal";
 
 const contentBlockIds: PortfolioBlockId[] = ["about", "projects", "skills", "certifications", "contact"];
 
@@ -37,6 +38,8 @@ const MouseTrackedSpotlight = () => {
 export function Dashboard() {
   const [isClient, setIsClient] = useState(false);
   const { state } = useAppContext();
+  const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
+  const [hasShownReward, setHasShownReward] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -44,8 +47,19 @@ export function Dashboard() {
 
   const contentBlocks = contentBlockIds.map(id => portfolioData[id]);
   const totalBlocks = contentBlocks.length;
-  const blockWidth = 352; // w-72 (288px) + px-8 (64px) -> Now w-72 (288px) + mx-8 (64px)
+  const blockWidth = 352; // w-72 (288px) + mx-8 (64px)
   const chainWidth = totalBlocks * blockWidth;
+
+  useEffect(() => {
+    // Check if all blocks have been mined
+    if (!hasShownReward && state.mintedBlocks.length === totalBlocks && totalBlocks > 0) {
+      // Use a timeout to let the final mint animation finish
+      setTimeout(() => {
+        setIsRewardModalOpen(true);
+        setHasShownReward(true);
+      }, 500); 
+    }
+  }, [state.mintedBlocks, totalBlocks, hasShownReward]);
 
   const chainVariants = {
     animate: {
@@ -99,6 +113,7 @@ export function Dashboard() {
       </main>
       {!state.hasCompletedOnboarding && state.isAuthenticated && <OnboardingGuide />}
       <AiAssistant />
+      <RewardModal isOpen={isRewardModalOpen} onOpenChange={setIsRewardModalOpen} />
     </div>
   );
 }
