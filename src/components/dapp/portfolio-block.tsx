@@ -1,24 +1,26 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useAppContext } from "@/contexts/app-context";
 import type { PortfolioBlock } from "@/lib/types";
-import { Lock, Unlock, Eye, Link as LinkIcon, DownloadCloud } from "lucide-react";
-import { useState } from "react";
+import { Lock, Unlock, Eye, DownloadCloud, LinkIcon, FileText, Briefcase, Star, Phone } from "lucide-react";
+import { useState, useMemo } from "react";
 import { MintModal } from "./mint-modal";
 import { ContentModal } from "./content-modal";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface PortfolioBlockProps {
   block: PortfolioBlock;
 }
+
+const blockIcons: Record<string, React.ElementType> = {
+  about: FileText,
+  projects: Briefcase,
+  skills: Star,
+  contact: Phone,
+};
+
 
 export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
   const { state } = useAppContext();
@@ -26,38 +28,47 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
   const [isMintModalOpen, setIsMintModalOpen] = useState(false);
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
 
+  const Icon = useMemo(() => blockIcons[block.id] || LinkIcon, [block.id]);
+
   return (
     <>
-      <motion.div 
-        className="w-96"
+      <motion.div
+        className="w-full max-w-md group"
         initial={{ opacity: 0.5, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <Card
-          className={`relative overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-primary/20 ${
+        <div
+          className={cn(
+            "relative w-full rounded-2xl border transition-all duration-300",
             isMined
-              ? "border-primary/50 bg-card shadow-lg shadow-primary/10"
+              ? "border-primary/40 bg-card shadow-lg shadow-primary/10"
               : "border-border/50 bg-card/60 backdrop-blur-sm"
-          }`}
+          )}
         >
-          <CardHeader>
-            <div className="flex items-start justify-between">
-              <div>
-                <CardTitle className="font-headline text-2xl">{block.title}</CardTitle>
-                <CardDescription>
-                  {isMined
-                    ? "Mined & Unlocked"
-                    : "Awaiting to be mined on-chain"}
-                </CardDescription>
-              </div>
-              <div className={`flex items-center gap-2 shrink-0 ml-4 transition-colors duration-500 ${isMined ? 'text-primary' : 'text-muted-foreground'}`}>
-                {isMined ? <Unlock className="h-5 w-5" /> : <Lock className="h-5 w-5" />}
-                <span className="text-sm font-medium">{isMined ? "Mined" : "Unmined"}</span>
-              </div>
+          <div className="p-5 flex items-center gap-5">
+            <motion.div
+              className={cn(
+                "w-14 h-14 rounded-full flex items-center justify-center transition-colors duration-300 shrink-0",
+                isMined ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
+              )}
+              whileHover={{ scale: 1.1 }}
+              transition={{type: 'spring', stiffness: 300}}
+            >
+              <Icon className="h-7 w-7" />
+            </motion.div>
+            <div className="flex-grow">
+                <h3 className="font-headline text-xl text-foreground">{block.title}</h3>
+                <p className="text-sm text-muted-foreground">
+                  {isMined ? "Mined & Unlocked" : "Awaiting to be mined"}
+                </p>
             </div>
-          </CardHeader>
-          <CardContent>
+            <div className={`flex items-center gap-2 shrink-0 transition-colors duration-500 ${isMined ? 'text-primary' : 'text-muted-foreground'}`}>
+                {isMined ? <Unlock className="h-4 w-4" /> : <Lock className="h-4 w-4" />}
+            </div>
+          </div>
+
+          <div className="px-5 pb-5">
             {isMined ? (
               <Button className="w-full" variant="outline" onClick={() => setIsContentModalOpen(true)}>
                 <Eye className="mr-2 h-4 w-4" />
@@ -69,18 +80,13 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
                 Mint Block
               </Button>
             )}
-          </CardContent>
+          </div>
+          
           {isMined && (
-            <motion.div 
-              className="absolute top-2 right-2 flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary"
-              initial={{scale: 0, rotate: -180}}
-              animate={{scale: 1, rotate: 0}}
-              transition={{delay: 0.3, type: 'spring'}}
-            >
-                <LinkIcon className="h-4 w-4"/>
-            </motion.div>
+            <div className="absolute top-0 right-0 h-full w-1 bg-primary rounded-r-2xl" />
           )}
-        </Card>
+
+        </div>
       </motion.div>
       
       {isMintModalOpen && (

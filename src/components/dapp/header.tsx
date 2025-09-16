@@ -22,14 +22,14 @@ function GasOracle() {
       }
     };
 
-    const intervalId = setInterval(fetchGasPrice, 10000); // Fetch every 10 seconds
+    const intervalId = setInterval(fetchGasPrice, 5000); // Fetch every 5 seconds for more dynamism
     fetchGasPrice(); // Initial fetch
 
     return () => clearInterval(intervalId);
   }, [dispatch]);
 
   return (
-    <div className="flex items-center gap-2 rounded-full bg-card px-3 py-1.5 text-sm text-muted-foreground shadow-inner">
+    <div className="flex items-center gap-2 rounded-full bg-card/80 px-3 py-1.5 text-sm text-muted-foreground shadow-inner backdrop-blur-sm">
       <Fuel className="h-4 w-4 text-primary" />
       <span>Gas:</span>
       <span className="font-mono font-medium text-foreground">
@@ -52,24 +52,25 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/50 bg-background/70 backdrop-blur-lg">
+    <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-lg">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-4">
-          <h1 className="font-headline text-2xl font-bold">
+          <h1 className="font-headline text-xl sm:text-2xl font-bold">
             Kaushal<span className="text-primary"> Waray</span>
           </h1>
+        </div>
+        <div className="flex items-center gap-2 sm:gap-4">
           <div className="hidden md:flex">
             <GasOracle />
           </div>
-        </div>
-        <div className="flex items-center gap-2 sm:gap-4">
-          <div className="flex items-center gap-2 rounded-full bg-card px-3 py-1.5 text-sm shadow-inner">
+          <div className="flex items-center gap-2 rounded-full bg-card/80 px-3 py-1.5 text-sm shadow-inner backdrop-blur-sm">
             <CircleDollarSign className="h-4 w-4 text-primary" />
             <span className="font-mono font-medium text-foreground">
-              {state.walletBalance.toFixed(4)} pETH
+              {state.walletBalance.toFixed(4)}
             </span>
+            <span className="hidden sm:inline">pETH</span>
           </div>
-          <div className="hidden items-center gap-2 rounded-full bg-card px-3 py-1.5 text-sm text-muted-foreground shadow-inner sm:flex">
+          <div className="hidden items-center gap-2 rounded-full bg-card/80 px-3 py-1.5 text-sm text-muted-foreground shadow-inner sm:flex backdrop-blur-sm">
             {formattedAddress}
           </div>
           <FaucetButton />
