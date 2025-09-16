@@ -44,18 +44,18 @@ export const portfolioData: Record<string, PortfolioBlock> = {
           repoUrl: 'https://github.com/KaushalWaray/DecStor',
         },
         {
-          title: 'Automated DevSecOps Pipeline for Smart Contracts',
-          description:
-            'Built an automated CI/CD pipeline using GitHub Actions and Hardhat for Ethereum smart contracts. The system integrates linting with Solhint, static analysis with Slither, and automated testing, culminating in conditional deployment to the Sepolia testnet. This ensures a high standard of code quality and security for every change.',
-          techStack: [
-            { name: 'Solidity', icon: IconSolidity },
-            { name: 'TypeScript', icon: IconTs },
-            { name: 'AWS', icon: IconAws },
-             // Using react icon as placeholder for hardhat
-            { name: 'Hardhat', icon: IconReact },
-          ],
-          repoUrl: '#',
-        },
+            title: 'Automated DevSecOps Pipeline for Smart Contracts',
+            description:
+              'Built an automated CI/CD pipeline using GitHub Actions and Hardhat for Ethereum smart contracts. The system integrates linting with Solhint, static analysis with Slither, and automated testing, culminating in conditional deployment to the Sepolia testnet. This ensures a high standard of code quality and security for every change.',
+            techStack: [
+              { name: 'Solidity', icon: IconSolidity },
+              { name: 'TypeScript', icon: IconTs },
+              { name: 'AWS', icon: IconAws },
+               // Using react icon as placeholder for hardhat
+              { name: 'Hardhat', icon: IconReact },
+            ],
+            repoUrl: '#',
+          },
       ],
     },
     complexity:
@@ -79,8 +79,8 @@ export const portfolioData: Record<string, PortfolioBlock> = {
           list: ['Solidity', 'PyTeal', 'Hardhat', 'Ethers.js', 'Ethereum', 'Algorand', 'IPFS', 'OpenZeppelin'],
         },
         {
-          category: 'Frontend Development',
-          list: ['React.js', 'Next.js', 'Tailwind CSS', 'ShadCN UI'],
+            category: 'Frontend Development',
+            list: ['React.js', 'Next.js', 'Tailwind CSS', 'ShadCN UI'],
         },
         {
             category: 'Programming & Databases',
@@ -126,5 +126,20 @@ export const portfolioData: Record<string, PortfolioBlock> = {
       'Simple block with a list of social media and contact links.',
     engagement:
       'Medium user engagement, encourages users to click external links.',
+  },
+  certifications: {
+    id: 'certifications',
+    title: 'Certifications',
+    content: {
+      description:
+        "I am committed to continuous learning and professional development. Here are some of my recent certifications.",
+      certifications: [
+        // User will provide details later
+      ],
+    },
+    complexity:
+      'Medium complexity with a list of entries and external links.',
+    engagement:
+      'Medium user engagement, encourages users to verify credentials.',
   },
 };

@@ -8,7 +8,7 @@ import { useAppContext } from "@/contexts/app-context";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const contentBlockIds: PortfolioBlockId[] = ["about", "projects", "skills", "contact"];
+const contentBlockIds: PortfolioBlockId[] = ["about", "projects", "skills", "certifications", "contact"];
 
 const MouseTrackedSpotlight = () => {
     const mouseX = useMotionValue(0);

@@ -11,7 +11,7 @@ import {
   import { Badge } from "@/components/ui/badge";
   import Image from "next/image";
   import { Button } from "../ui/button";
-  import { ExternalLink, Github } from "lucide-react";
+  import { ExternalLink, Github, BookCopy } from "lucide-react";
   import Link from "next/link";
   import { useEffect, useState } from "react";
   
@@ -54,7 +54,7 @@ import {
                     <div className="prose prose-invert max-w-none text-muted-foreground prose-p:text-base whitespace-pre-wrap">
                         <p>{block.content.description}</p>
                     </div>
-  
+
                     {block.id === 'about' && block.content.profileImage && (
                         <div className="mt-6">
                           <div className="flex flex-col sm:flex-row items-center gap-6 rounded-lg border bg-card/50 p-6">
@@ -126,6 +126,21 @@ import {
                         <div key={index} className="mt-4 flex items-center gap-4">
                             <contact.icon className="h-5 w-5 text-primary"/>
                             <Link href={contact.href} target="_blank" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{contact.value}</Link>
+                        </div>
+                    ))}
+
+                    {block.id === 'certifications' && block.content.certifications?.map((cert, index) => (
+                        <div key={index} className="mt-6 rounded-lg border bg-card/50 p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                          <div>
+                            <h4 className="font-headline text-xl">{cert.title}</h4>
+                            <p className="text-sm text-muted-foreground mt-1">{cert.issuer} - Issued {cert.date}</p>
+                          </div>
+                           <Button asChild size="sm" variant="outline" className="shrink-0">
+                               <Link href={cert.credentialUrl} target="_blank">
+                                <BookCopy className="mr-2 h-4 w-4"/>
+                                View Credential
+                               </Link>
+                            </Button>
                         </div>
                     ))}
                 </div>
