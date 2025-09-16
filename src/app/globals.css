@@ -13,7 +13,7 @@
     --popover: 222 83% 4%;
     --popover-foreground: 210 40% 98%;
  
-    --primary: 158 81% 45%;
+    --primary: 217 91% 60%;
     --primary-foreground: 210 40% 98%;
  
     --secondary: 217 33% 17%;
@@ -22,7 +22,7 @@
     --muted: 217 33% 17%;
     --muted-foreground: 215 20% 65%;
  
-    --accent: 217 91% 60%;
+    --accent: 158 81% 45%;
     --accent-foreground: 210 40% 98%;
  
     --destructive: 0 63% 31%;
@@ -45,8 +45,8 @@
     --popover: 224 71% 4%;
     --popover-foreground: 213 30% 90%;
 
-    --primary: 142 76% 47%; /* A more vibrant, electric green */
-    --primary-foreground: 142 100% 10%; /* Dark green text for on-primary buttons */
+    --primary: 217 91% 60%; /* Vibrant Blue */
+    --primary-foreground: 210 40% 98%; /* White text on blue buttons */
 
     --secondary: 215 28% 17%; /* A cool, dark blue-gray */
     --secondary-foreground: 213 30% 90%;
@@ -54,15 +54,15 @@
     --muted: 215 28% 17%;
     --muted-foreground: 215 20% 55%;
 
-    --accent: 260 84% 60%; /* A vibrant violet/blue for accents */
-    --accent-foreground: 213 30% 98%;
+    --accent: 158 81% 45%; /* Electric Green for accents */
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 63% 40%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 215 28% 17%;
     --input: 215 28% 17%;
-    --ring: 142 76% 47%; /* Ring color matches the new primary green */
+    --ring: 217 91% 60%; /* Ring color matches the new primary blue */
   }
 }
  
