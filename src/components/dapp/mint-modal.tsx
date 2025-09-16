@@ -11,7 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useAppContext } from "@/contexts/app-context";
 import { useToast } from "@/hooks/use-toast";
 import { calculateMintCost } from "@/ai/flows/calculate-mint-cost";
@@ -24,7 +24,7 @@ interface MintModalProps {
   block: PortfolioBlock;
 }
 
-type MintingState = "idle" | "calculating" | "confirm" | "mining" | "error";
+type MintingState = "calculating" | "mining" | "error";
 
 export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
   const { state, dispatch } = useAppContext();
@@ -36,9 +36,20 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
   const [progress, setProgress] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const handleMintSuccess = useCallback(() => {
+    dispatch({
+      type: "MINT_BLOCK",
+      payload: { blockId: block.id, cost: totalCost },
+    });
+    toast({
+      title: "Mint Successful!",
+      description: `Block "${block.title}" has been added to the chain.`,
+    });
+    onOpenChange(false);
+  }, [dispatch, toast, onOpenChange, block.id, totalCost]);
+
   useEffect(() => {
     if (!isOpen) {
-      // Reset state on close
       setTimeout(() => {
         setMintingState("calculating");
         setProgress(0);
@@ -47,7 +58,7 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
       return;
     }
 
-    async function getCost() {
+    async function getCostAndMine() {
       setMintingState("calculating");
       try {
         const costResult = await calculateMintCost({
@@ -57,10 +68,20 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
         });
 
         if (costResult && typeof costResult.mintCost === 'number') {
-          const calculatedBaseCost = costResult.mintCost / 10; // Adjusting scale for better UI representation
+          const calculatedBaseCost = costResult.mintCost / 10;
+          const finalTotalCost = calculatedBaseCost + state.gasPrice;
+          
           setBaseCost(calculatedBaseCost);
-          setTotalCost(calculatedBaseCost + state.gasPrice);
-          setMintingState("confirm");
+          setTotalCost(finalTotalCost);
+
+          if (state.walletBalance < finalTotalCost) {
+            setErrorMessage("Insufficient pETH balance to mint this block.");
+            setMintingState("error");
+            return;
+          }
+          
+          setMintingState("mining");
+
         } else {
             throw new Error("Invalid cost calculation result.");
         }
@@ -71,17 +92,18 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
       }
     }
 
-    getCost();
-  }, [isOpen, block, state.gasPrice]);
+    getCostAndMine();
+  }, [isOpen, block, state.gasPrice, state.walletBalance]);
 
   useEffect(() => {
     if (mintingState !== 'mining') return;
 
     const timer = setInterval(() => {
         setProgress(prev => {
-            if (prev >= 100) {
+            if (prev >= 99) {
                 clearInterval(timer);
-                handleMintSuccess();
+                // Delay success slightly to allow progress bar to reach 100%
+                setTimeout(() => handleMintSuccess(), 200); 
                 return 100;
             }
             return prev + 1;
@@ -89,28 +111,7 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
     }, 40);
 
     return () => clearInterval(timer);
-  }, [mintingState]);
-
-  const handleMint = () => {
-    if (state.walletBalance < totalCost) {
-      setErrorMessage("Insufficient pETH balance to mint this block.");
-      setMintingState("error");
-      return;
-    }
-    setMintingState("mining");
-  };
-
-  const handleMintSuccess = () => {
-    dispatch({
-      type: "MINT_BLOCK",
-      payload: { blockId: block.id, cost: totalCost },
-    });
-    toast({
-      title: "Mint Successful!",
-      description: `Block "${block.title}" has been added to the chain.`,
-    });
-    onOpenChange(false);
-  };
+  }, [mintingState, handleMintSuccess]);
 
 
   return (
@@ -121,20 +122,23 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
             Mine Block: {block.title}
           </DialogTitle>
           <DialogDescription>
-            Confirm the transaction to permanently add this block to your personal chain.
+            Transaction in progress. Permanently adding this block to your personal chain.
           </DialogDescription>
         </DialogHeader>
         
         {mintingState === 'calculating' && (
-            <div className="flex items-center justify-center p-8 text-muted-foreground">
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Calculating transaction cost...
+            <div className="flex flex-col items-center justify-center p-8 gap-4 text-muted-foreground">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                <div className="text-center">
+                    <p>Submitting to AI Economist...</p>
+                    <p className="text-xs">Calculating transaction cost based on block complexity.</p>
+                </div>
             </div>
         )}
-
-        {mintingState === 'confirm' && (
-            <div className="space-y-4">
-                <div className="rounded-lg border bg-card/50 p-4">
+        
+        {mintingState === 'mining' && (
+            <div className="space-y-4 p-4">
+                <div className="rounded-lg border bg-card/50 p-3">
                     <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">Base Fee</span>
                         <span className="font-mono">{baseCost.toFixed(4)} pETH</span>
@@ -148,19 +152,13 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
                         <span className="font-mono text-primary">{totalCost.toFixed(4)} pETH</span>
                     </div>
                 </div>
-                <div className="text-sm text-muted-foreground">
-                    Your current balance is <span className="font-mono font-medium text-foreground">{state.walletBalance.toFixed(4)} pETH</span>.
+                <div className="space-y-3">
+                    <p className="text-center text-sm text-primary">Mining transaction... (Proof-of-Work)</p>
+                    <Progress value={progress} />
+                    <p className="text-center text-xs text-muted-foreground font-mono">
+                        Block hash: 0x{Array.from({ length: 16 }, () => "0123456789abcdef"[Math.floor(Math.random() * 16)]).join("")}...
+                    </p>
                 </div>
-            </div>
-        )}
-        
-        {mintingState === 'mining' && (
-            <div className="space-y-3 p-4">
-                <p className="text-center text-sm text-primary">Mining transaction... (Proof-of-Work)</p>
-                <Progress value={progress} />
-                <p className="text-center text-xs text-muted-foreground font-mono">
-                    Block hash: 0x{Array.from({ length: 16 }, () => "0123456789abcdef"[Math.floor(Math.random() * 16)]).join("")}...
-                </p>
             </div>
         )}
 
@@ -173,11 +171,6 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
         )}
 
         <DialogFooter>
-          {mintingState === "confirm" && (
-            <Button className="w-full font-bold" onClick={handleMint}>
-              Confirm & Mine
-            </Button>
-          )}
            {mintingState === 'error' && (
              <Button className="w-full" variant="outline" onClick={() => onOpenChange(false)}>
                 Close
