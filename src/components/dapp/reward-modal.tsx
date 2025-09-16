@@ -61,6 +61,7 @@ export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
     const [isCopied, setIsCopied] = useState(false);
     const rewardRef = useRef<HTMLDivElement>(null);
     const transactionHash = "0x7a8b2c9d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b";
+    const truncatedHash = `${transactionHash.slice(0, 10)}...${transactionHash.slice(-8)}`;
 
     const handleCopy = () => {
         navigator.clipboard.writeText(transactionHash);
@@ -150,7 +151,7 @@ export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
                         </div>
                         <div className="w-full text-left font-mono text-[10px] space-y-1 z-10">
                             <p className="truncate"><span className="text-muted-foreground">Issuer:</span> Kaushal.dev</p>
-                            <p className="truncate"><span className="text-muted-foreground">Tx Hash:</span> {transactionHash}</p>
+                            <p className="truncate"><span className="text-muted-foreground">Tx Hash:</span> {truncatedHash}</p>
                         </div>
                     </div>
                 </div>
