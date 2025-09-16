@@ -53,13 +53,8 @@ function appReducer(state: AppState, action: Action): AppState {
         walletBalance: action.payload.balance,
       };
     case "DISCONNECT_WALLET":
-      // Preserve minted blocks on disconnect to show progress
-      return { 
-        ...initialState, 
-        isAuthenticated: false, 
-        isInitialized: true,
-        mintedBlocks: state.mintedBlocks,
-       };
+      localStorage.removeItem(LOCAL_STORAGE_KEY);
+      return { ...initialState, isInitialized: true, isAuthenticated: false };
     case "CLAIM_FAUCET":
       return {
         ...state,
@@ -107,12 +102,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (state.isInitialized) {
+    if (state.isInitialized && state.isAuthenticated) {
       try {
         const stateToSave = {
-          ...state,
-          gasPrice: undefined, // Don't persist gas price
-          isInitialized: undefined, // Don't persist initialization status
+          isAuthenticated: state.isAuthenticated,
+          walletAddress: state.walletAddress,
+          walletBalance: state.walletBalance,
+          mintedBlocks: state.mintedBlocks,
         };
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(stateToSave));
       } catch (error) {
@@ -120,6 +116,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       }
     }
   }, [state]);
+
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>
