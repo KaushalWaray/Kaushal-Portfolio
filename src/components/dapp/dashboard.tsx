@@ -54,7 +54,7 @@ export function Dashboard() {
       }, 500);
       return () => clearTimeout(timer);
     }
-  }, [state.mintedBlocks.length]);
+  }, [state.mintedBlocks.length, state.hasCompletedOnboarding]);
 
   const contentBlocks = contentBlockIds.map(id => portfolioData[id]);
   const totalBlocks = contentBlocks.length;
@@ -96,8 +96,9 @@ export function Dashboard() {
                     {[...contentBlocks, ...contentBlocks].map((block, index) => (
                         <div key={`${block.id}-${index}`} className="flex items-center px-8">
                             <PortfolioBlockDisplay block={portfolioData[block.id as PortfolioBlockId]} />
-                            <svg width="64" height="24" viewBox="0 0 64 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-16 h-6 mx-4 text-primary/30">
-                              <path d="M0 12L10 12M54 12L64 12M22 12L42 12" stroke="currentColor" strokeWidth="2"/>
+                            <svg width="64" height="24" viewBox="0 0 64 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-16 h-6 shrink-0 text-primary/30">
+                              <path d="M0 12H10" stroke="currentColor" strokeWidth="2"/>
+                              <path d="M54 12H64" stroke="currentColor" strokeWidth="2"/>
                               <path className="connector-line" d="M10 2L22 2V22H10V18C10 14.6863 12.6863 12 16 12C12.6863 12 10 9.31371 10 6V2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                               <path className="connector-line" d="M54 2L42 2V22H54V18C54 14.6863 51.3137 12 48 12C51.3137 12 54 9.31371 54 6V2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
