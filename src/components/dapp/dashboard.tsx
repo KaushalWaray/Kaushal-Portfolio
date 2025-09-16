@@ -8,7 +8,6 @@ import { useAppContext } from "@/contexts/app-context";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import { OnboardingGuide } from "./onboarding-guide";
-import { RewardModal } from "./reward-modal";
 
 const contentBlockIds: PortfolioBlockId[] = ["about", "projects", "skills", "education", "certifications", "contact"];
 
@@ -37,28 +36,16 @@ const MouseTrackedSpotlight = () => {
 export function Dashboard() {
   const [isClient, setIsClient] = useState(false);
   const { state } = useAppContext();
-  const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
-  const [hasShownReward, setHasShownReward] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   const contentBlocks = contentBlockIds.map(id => portfolioData[id]);
+  const doubledContentBlocks = [...contentBlocks, ...contentBlocks];
   const totalBlocks = contentBlocks.length;
   const blockWidth = 352; // w-72 (288px) + mx-8 (64px)
   const chainWidth = totalBlocks * blockWidth;
-
-  useEffect(() => {
-    // Check if all blocks have been mined
-    if (!hasShownReward && state.mintedBlocks.length === totalBlocks && totalBlocks > 0) {
-      // Use a timeout to let the final mint animation finish
-      setTimeout(() => {
-        setIsRewardModalOpen(true);
-        setHasShownReward(true);
-      }, 500); 
-    }
-  }, [state.mintedBlocks, totalBlocks, hasShownReward]);
 
   const chainVariants = {
     animate: {
@@ -92,7 +79,7 @@ export function Dashboard() {
                     variants={chainVariants}
                     animate="animate"
                 >
-                    {[...contentBlocks, ...contentBlocks].map((block, index) => (
+                    {doubledContentBlocks.map((block, index) => (
                         <div key={`${block.id}-${index}`} className="flex items-center">
                             <div className="mx-8">
                               <PortfolioBlockDisplay block={portfolioData[block.id as PortfolioBlockId]} />
@@ -111,7 +98,6 @@ export function Dashboard() {
         </div>
       </main>
       {!state.hasCompletedOnboarding && state.isAuthenticated && <OnboardingGuide />}
-      <RewardModal isOpen={isRewardModalOpen} onOpenChange={setIsRewardModalOpen} />
     </div>
   );
 }
