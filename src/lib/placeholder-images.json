@@ -1,21 +1,21 @@
 {
   "placeholderImages": [
     {
-      "id": "dappfolio-profile",
+      "id": "kaushal-profile",
       "description": "A placeholder image for the user's profile picture in the about me section.",
-      "imageUrl": "https://picsum.photos/seed/dappfolio-profile/400/400",
+      "imageUrl": "https://picsum.photos/seed/kaushal-profile/400/400",
       "imageHint": "professional developer portrait"
     },
     {
-      "id": "dappfolio-project1",
+      "id": "kaushal-project1",
       "description": "A placeholder image for the DeFi Yield Aggregator project.",
-      "imageUrl": "https://picsum.photos/seed/dappfolio-project1/600/400",
+      "imageUrl": "https://picsum.photos/seed/kaushal-project1/600/400",
       "imageHint": "decentralized finance dashboard"
     },
     {
-      "id": "dappfolio-project2",
+      "id": "kaushal-project2",
       "description": "A placeholder image for the NFT Marketplace project.",
-      "imageUrl": "https://picsum.photos/seed/dappfolio-project2/600/400",
+      "imageUrl": "https://picsum.photos/seed/kaushal-project2/600/400",
       "imageHint": "NFT art collection"
     }
   ]

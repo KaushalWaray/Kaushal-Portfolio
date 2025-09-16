@@ -4,7 +4,7 @@ import { AppProvider } from '@/contexts/app-context';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'DAppfolio',
+  title: 'Kaushal Waray',
   description: 'A decentralized portfolio experience.',
 };
 

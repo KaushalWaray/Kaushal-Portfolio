@@ -56,7 +56,7 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-4">
           <h1 className="font-headline text-2xl font-bold">
-            DApp<span className="text-primary">folio</span>
+            Kaushal<span className="text-primary"> Waray</span>
           </h1>
           <div className="hidden md:flex">
             <GasOracle />

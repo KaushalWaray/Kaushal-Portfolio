@@ -38,7 +38,7 @@ export function LandingPage() {
 
         <div className="relative z-10 flex flex-col items-center text-center">
           <h1 className="font-headline text-5xl font-bold md:text-7xl">
-            DApp<span className="text-primary animate-glow">folio</span>
+            Kaushal<span className="text-primary animate-glow"> Waray</span>
           </h1>
           <p className="mt-4 max-w-xl text-lg text-muted-foreground">
             Explore a portfolio experience reimagined for the decentralized web.
@@ -62,7 +62,7 @@ export function LandingPage() {
               Connect Wallet
             </AlertDialogTitle>
             <AlertDialogDescription className="text-center">
-              DAppfolio uses a simulated wallet for this experience. No real
+              This portfolio uses a simulated wallet for this experience. No real
               blockchain transaction will be made.
             </AlertDialogDescription>
           </AlertDialogHeader>
@@ -72,7 +72,7 @@ export function LandingPage() {
               onClick={handleConnect}
             >
               <Wallet className="mr-2 h-5 w-5" />
-              Connect with DAppfolio Wallet
+              Connect with Simulated Wallet
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

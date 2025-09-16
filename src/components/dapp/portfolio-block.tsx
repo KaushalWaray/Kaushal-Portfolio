@@ -52,7 +52,7 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
           <CardDescription>
             {isMined
               ? "This block has been mined and its content is unlocked."
-              : "Mint this block to reveal its content on the DAppfolio chain."}
+              : "Mint this block to reveal its content on the portfolio chain."}
           </CardDescription>
         </CardHeader>
         <CardContent>

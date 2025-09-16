@@ -10,7 +10,7 @@ import {
   type Dispatch,
 } from "react";
 
-const LOCAL_STORAGE_KEY = "dappfolio-state";
+const LOCAL_STORAGE_KEY = "kaushal-waray-portfolio-state";
 
 // State
 interface AppState {

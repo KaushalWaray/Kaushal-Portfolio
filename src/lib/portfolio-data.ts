@@ -17,7 +17,7 @@ export const portfolioData: Record<string, PortfolioBlock> = {
     content: {
       description:
         "Hello! I'm a passionate full-stack developer with a love for building innovative and decentralized applications. With a background in both front-end and back-end technologies, I specialize in creating seamless user experiences powered by robust and scalable architectures. I'm driven by the potential of blockchain to revolutionize how we interact with the web.",
-      profileImage: 'https://picsum.photos/seed/dappfolio-profile/400/400',
+      profileImage: 'https://picsum.photos/seed/kaushal-profile/400/400',
       profileImageHint: 'professional developer portrait',
     },
     complexity: 'Simple text and image block.',
@@ -33,7 +33,7 @@ export const portfolioData: Record<string, PortfolioBlock> = {
           title: 'DeFi Yield Aggregator',
           description:
             'A platform that automatically moves user funds between different lending protocols to maximize interest gains. Features a clean dashboard and transaction history.',
-          imageUrl: 'https://picsum.photos/seed/dappfolio-project1/600/400',
+          imageUrl: 'https://picsum.photos/seed/kaushal-project1/600/400',
           imageHint: 'decentralized finance dashboard',
           techStack: [
             { name: 'React', icon: IconReact },
@@ -47,7 +47,7 @@ export const portfolioData: Record<string, PortfolioBlock> = {
           title: 'NFT Marketplace',
           description:
             'A full-featured marketplace for creating, buying, and selling non-fungible tokens. Implemented smart contracts for auctions and secure ownership transfer.',
-          imageUrl: 'https://picsum.photos/seed/dappfolio-project2/600/400',
+          imageUrl: 'https://picsum.photos/seed/kaushal-project2/600/400',
           imageHint: 'NFT art collection',
           techStack: [
             { name: 'TypeScript', icon: IconTs },

@@ -121,7 +121,7 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
             Mint Block: {block.title}
           </DialogTitle>
           <DialogDescription>
-            Confirm the transaction to permanently add this block to your DAppfolio.
+            Confirm the transaction to permanently add this block to your portfolio.
           </DialogDescription>
         </DialogHeader>
         
