@@ -15,7 +15,8 @@ export default function Home() {
 
   if (!isClient) {
     // Render a static version of the landing page on the server
-    // to avoid a hydration mismatch.
+    // to avoid a hydration mismatch. This guarantees the first client
+    // render matches the server render.
     return <LandingPage />;
   }
   
