@@ -55,7 +55,7 @@ export function Dashboard() {
   return (
     <div className="min-h-screen w-full bg-background flex flex-col">
       <Header />
-      <main className="flex-1 w-full relative flex flex-col items-center justify-center py-12 overflow-x-hidden">
+      <main className="flex-1 w-full relative flex flex-col items-center justify-center py-12">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--secondary)/0.4)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--secondary)/0.4)_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
         </div>
@@ -68,7 +68,7 @@ export function Dashboard() {
               animate={{ x: [0, '-50%'] }}
               transition={{
                 ease: 'linear',
-                duration: 60,
+                duration: 30,
                 repeat: Infinity,
               }}
             >
