@@ -154,22 +154,14 @@ export function AiAssistant() {
                         className="rounded-full shadow-lg w-16 h-16"
                         >
                         {isOpen ? <X className="h-7 w-7" /> : (
-                            <svg
+                            <svg 
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
+                                fill="currentColor"
                                 className="h-7 w-7"
-                              >
-                                <path d="M12 3L9.5 8.5L4 11L9.5 13.5L12 19L14.5 13.5L20 11L14.5 8.5L12 3z" />
-                                <path d="M5 3L7 8" />
-                                <path d="M19 3L17 8" />
-                                <path d="M5 21L7 16" />
-                                <path d="M19 21L17 16" />
-                              </svg>
+                            >
+                                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M8,11.5L9.5,14.5L12.5,16L9.5,17.5L8,20.5L6.5,17.5L3.5,16L6.5,14.5L8,11.5M16.5,5.5L15,8.5L12,10L15,11.5L16.5,14.5L18,11.5L21,10L18,8.5L16.5,5.5Z" />
+                            </svg>
                         )}
                     </Button>
                 </TooltipTrigger>
@@ -184,3 +176,4 @@ export function AiAssistant() {
     </div>
   );
 }
+
