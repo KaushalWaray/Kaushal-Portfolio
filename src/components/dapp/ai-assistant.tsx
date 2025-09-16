@@ -117,11 +117,17 @@ export function AiAssistant() {
                             className="text-sm text-center text-muted-foreground p-4 bg-secondary/30 rounded-lg"
                          >
                             <p className="font-semibold mb-3">Don't know where to start?</p>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div className="flex flex-col gap-2">
                                 {suggestedQuestions.map(q => (
-                                    <Button key={q} variant="outline" size="sm" className="h-auto py-2 text-left" onClick={(e) => handleSubmit(e, q)}>
+                                    <Button
+                                      key={q}
+                                      variant="outline"
+                                      size="sm"
+                                      className="h-auto justify-start py-2 text-left"
+                                      onClick={(e) => handleSubmit(e, q)}
+                                    >
                                         <Feather className="mr-2 h-3.5 w-3.5 shrink-0" />
-                                        {q}
+                                        <span>{q}</span>
                                     </Button>
                                 ))}
                             </div>
