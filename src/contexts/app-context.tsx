@@ -11,6 +11,7 @@ import {
 } from "react";
 
 const LOCAL_STORAGE_KEY = "kaushal-waray-portfolio-state";
+const MINING_REWARD = 0.10; // Fixed reward for mining a block
 
 // State
 interface AppState {
@@ -75,7 +76,7 @@ function appReducer(state: AppState, action: Action): AppState {
       }
       return {
         ...state,
-        walletBalance: state.walletBalance - action.payload.cost,
+        walletBalance: state.walletBalance - action.payload.cost + MINING_REWARD,
         mintedBlocks: [...state.mintedBlocks, action.payload.blockId],
       };
     case "SET_GAS_PRICE":

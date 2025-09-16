@@ -42,7 +42,7 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
     });
     toast({
       title: "Mint Successful!",
-      description: `Block "${block.title}" has been added to the chain.`,
+      description: `Block "${block.title}" added to the chain. +0.10 pETH reward!`,
     });
     onOpenChange(false);
   }, [dispatch, toast, onOpenChange, block.id, totalCost]);
