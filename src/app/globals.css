@@ -36,33 +36,33 @@
   }
  
   .dark {
-    --background: 224 71% 4%; /* A very dark, deep blue */
-    --foreground: 213 30% 90%; /* A softer, off-white for text */
+    --background: 224 71% 4%; /* Deep Space Blue */
+    --foreground: 213 30% 90%; /* Softer off-white */
 
-    --card: 220 26% 10%; /* A slightly lighter neutral for cards */
+    --card: 220 26% 10%; /* Slightly lighter blue-gray for cards */
     --card-foreground: 213 30% 90%;
 
     --popover: 224 71% 4%;
     --popover-foreground: 213 30% 90%;
 
-    --primary: 217 91% 60%; /* Vibrant Blue */
-    --primary-foreground: 210 40% 98%; /* White text on blue buttons */
+    --primary: 38 92% 50%; /* Molten Gold / Amber */
+    --primary-foreground: 220 26% 10%; /* Dark text on gold buttons */
 
-    --secondary: 215 28% 17%; /* A cool, dark blue-gray */
+    --secondary: 215 28% 17%; /* Cool, dark blue-gray */
     --secondary-foreground: 213 30% 90%;
 
     --muted: 215 28% 17%;
     --muted-foreground: 215 20% 55%;
 
-    --accent: 158 81% 45%; /* Electric Green for accents */
-    --accent-foreground: 210 40% 98%;
+    --accent: 215 28% 25%; /* A slightly lighter shade for hovers */
+    --accent-foreground: 213 30% 90%;
 
     --destructive: 0 63% 40%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 215 28% 17%;
     --input: 215 28% 17%;
-    --ring: 217 91% 60%; /* Ring color matches the new primary blue */
+    --ring: 38 92% 50%; /* Ring color matches the new primary gold */
   }
 }
  
