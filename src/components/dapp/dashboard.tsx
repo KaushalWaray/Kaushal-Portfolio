@@ -4,7 +4,6 @@ import { Header } from "@/components/dapp/header";
 import { PortfolioBlockDisplay } from "@/components/dapp/portfolio-block";
 import { portfolioData } from "@/lib/portfolio-data";
 import type { PortfolioBlockId } from "@/lib/types";
-import { AiAssistant } from "@/components/dapp/ai-assistant";
 import { useAppContext } from "@/contexts/app-context";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { Cpu } from "lucide-react";
@@ -112,7 +111,6 @@ export function Dashboard() {
             </div>
         </div>
       </main>
-      <AiAssistant />
     </div>
   );
 }
