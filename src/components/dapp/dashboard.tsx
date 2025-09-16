@@ -4,6 +4,7 @@ import { Header } from "@/components/dapp/header";
 import { PortfolioBlockDisplay } from "@/components/dapp/portfolio-block";
 import { portfolioData } from "@/lib/portfolio-data";
 import type { PortfolioBlockId } from "@/lib/types";
+import { AiAssistant } from "@/components/dapp/ai-assistant";
 
 export function Dashboard() {
   const blockOrder: PortfolioBlockId[] = ["about", "projects", "skills", "contact"];
@@ -18,6 +19,7 @@ export function Dashboard() {
           ))}
         </div>
       </main>
+      <AiAssistant />
     </div>
   );
 }
