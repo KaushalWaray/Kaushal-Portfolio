@@ -14,9 +14,8 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useState, useEffect, useCallback } from "react";
 import { useAppContext } from "@/contexts/app-context";
 import { useToast } from "@/hooks/use-toast";
-import { calculateMintCost } from "@/ai/flows/calculate-mint-cost";
 import type { PortfolioBlock } from "@/lib/types";
-import { AlertTriangle, Loader2 } from "lucide-react";
+import { AlertTriangle } from "lucide-react";
 
 interface MintModalProps {
   isOpen: boolean;
@@ -24,13 +23,13 @@ interface MintModalProps {
   block: PortfolioBlock;
 }
 
-type MintingState = "calculating" | "mining" | "error";
+type MintingState = "mining" | "error";
 
 export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
   const { state, dispatch } = useAppContext();
   const { toast } = useToast();
 
-  const [mintingState, setMintingState] = useState<MintingState>("calculating");
+  const [mintingState, setMintingState] = useState<MintingState>("mining");
   const [baseCost, setBaseCost] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -51,48 +50,31 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
   useEffect(() => {
     if (!isOpen) {
       setTimeout(() => {
-        setMintingState("calculating");
+        setMintingState("mining");
         setProgress(0);
         setErrorMessage("");
       }, 300);
       return;
     }
 
-    async function getCostAndMine() {
-      setMintingState("calculating");
-      try {
-        const costResult = await calculateMintCost({
-          blockType: block.title,
-          contentComplexity: block.complexity,
-          userEngagementPotential: block.engagement,
-        });
+    function calculateCostAndMine() {
+      // Use a deterministic base fee instead of AI calculation
+      const calculatedBaseCost = 0.15 + (block.id.length * 0.01); // Simple deterministic cost
+      const finalTotalCost = calculatedBaseCost + state.gasPrice;
+      
+      setBaseCost(calculatedBaseCost);
+      setTotalCost(finalTotalCost);
 
-        if (costResult && typeof costResult.mintCost === 'number') {
-          const calculatedBaseCost = costResult.mintCost / 10;
-          const finalTotalCost = calculatedBaseCost + state.gasPrice;
-          
-          setBaseCost(calculatedBaseCost);
-          setTotalCost(finalTotalCost);
-
-          if (state.walletBalance < finalTotalCost) {
-            setErrorMessage("Insufficient pETH balance to mint this block.");
-            setMintingState("error");
-            return;
-          }
-          
-          setMintingState("mining");
-
-        } else {
-            throw new Error("Invalid cost calculation result.");
-        }
-      } catch (error) {
-        console.error("Failed to calculate mint cost:", error);
-        setErrorMessage("Could not determine minting cost. Please try again later.");
+      if (state.walletBalance < finalTotalCost) {
+        setErrorMessage("Insufficient pETH balance to mint this block.");
         setMintingState("error");
+        return;
       }
+      
+      setMintingState("mining");
     }
 
-    getCostAndMine();
+    calculateCostAndMine();
   }, [isOpen, block, state.gasPrice, state.walletBalance]);
 
   useEffect(() => {
@@ -125,16 +107,6 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
             Transaction in progress. Permanently adding this block to your personal chain.
           </DialogDescription>
         </DialogHeader>
-        
-        {mintingState === 'calculating' && (
-            <div className="flex flex-col items-center justify-center p-8 gap-4 text-muted-foreground">
-                <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                <div className="text-center">
-                    <p>Submitting to AI Economist...</p>
-                    <p className="text-xs">Calculating transaction cost based on block complexity.</p>
-                </div>
-            </div>
-        )}
         
         {mintingState === 'mining' && (
             <div className="space-y-4 p-4">
