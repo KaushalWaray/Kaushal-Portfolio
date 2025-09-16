@@ -37,16 +37,23 @@ const MouseTrackedSpotlight = () => {
 export function Dashboard() {
   const { state } = useAppContext();
   const [isClient, setIsClient] = useState(false);
+  const [shuffledBlocks, setShuffledBlocks] = useState<any[]>([]);
 
   useEffect(() => {
     setIsClient(true);
+    const blocks = contentBlockIds.map(id => portfolioData[id]);
+    const dummyBlocks = Array.from({ length: dummyBlockCount }, (_, i) => ({ id: `dummy-${i}`, title: 'Empty Block' }));
+    
+    const allBlocks = [...blocks, ...dummyBlocks];
+    // Shuffle the array to make the chain look different on each load
+    for (let i = allBlocks.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [allBlocks[i], allBlocks[j]] = [allBlocks[j], allBlocks[i]];
+    }
+    setShuffledBlocks(allBlocks);
   }, []);
 
-  const blocks = contentBlockIds.map(id => portfolioData[id]);
-  const dummyBlocks = Array.from({ length: dummyBlockCount }, (_, i) => ({ id: `dummy-${i}`, title: 'Dummy Block' }));
-
-  const allBlocks = [...blocks, ...dummyBlocks].sort(() => Math.random() - 0.5);
-  const totalBlocks = allBlocks.length;
+  const totalBlocks = shuffledBlocks.length;
   const blockWidth = 352; // 320px width + 32px gap
   const chainWidth = totalBlocks * blockWidth;
 
@@ -78,14 +85,15 @@ export function Dashboard() {
 
         <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
             <div className="w-full h-96 flex items-center justify-center">
+              {shuffledBlocks.length > 0 && (
                 <motion.div
                     className="flex items-center"
                     variants={chainVariants}
                     animate="animate"
                 >
-                    {[...allBlocks, ...allBlocks].map((block, index) => (
+                    {[...shuffledBlocks, ...shuffledBlocks].map((block, index) => (
                         <div key={`${block.id}-${index}`} className="flex items-center px-4">
-                             {block.title === 'Dummy Block' ? (
+                             {block.title === 'Empty Block' ? (
                                 <motion.div 
                                     className="w-72 group shrink-0"
                                     whileHover={{ scale: 1.05, y: -5 }}
@@ -108,6 +116,7 @@ export function Dashboard() {
                         </div>
                     ))}
                 </motion.div>
+              )}
             </div>
         </div>
       </main>
