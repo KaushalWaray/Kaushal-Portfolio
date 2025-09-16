@@ -62,7 +62,7 @@ export function Header() {
         <div className="flex items-center gap-2 sm:gap-4">
           <Button variant="outline" size="sm" onClick={() => dispatch({ type: 'TOGGLE_ASSISTANT' })}>
             <Bot className="mr-2 h-4 w-4" />
-            AI Assistant
+            <span className="hidden sm:inline">AI </span>Assistant
           </Button>
           <div className="hidden md:flex">
             <GasOracle />
