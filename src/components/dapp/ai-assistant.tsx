@@ -53,11 +53,11 @@ export function AiAssistant() {
       <AnimatePresence>
         {isOpen && (
             <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 50, scale: 0.9 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="w-[380px] h-[500px] bg-card border border-border/70 rounded-2xl shadow-2xl flex flex-col origin-bottom-right"
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="w-[380px] h-[500px] bg-card/80 backdrop-blur-lg border border-border/70 rounded-2xl shadow-2xl flex flex-col origin-bottom-right"
             >
             <div className="flex items-center justify-between p-4 border-b border-border/50">
               <div className="flex items-center gap-2">
@@ -72,14 +72,14 @@ export function AiAssistant() {
               <div className="space-y-4">
                 {messages.map((msg, index) => (
                   <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`p-3 rounded-2xl max-w-[80%] ${msg.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}>
+                    <div className={`p-3 rounded-2xl max-w-[80%] ${msg.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-secondary'}`}>
                       <p className="text-sm">{msg.content}</p>
                     </div>
                   </div>
                 ))}
                 {isLoading && (
                     <div className="flex justify-start">
-                        <div className="p-3 rounded-2xl bg-muted flex items-center gap-2">
+                        <div className="p-3 rounded-2xl bg-secondary flex items-center gap-2">
                            <Loader2 className="h-4 w-4 animate-spin"/>
                            <p className="text-sm text-muted-foreground">Thinking...</p>
                         </div>
@@ -92,7 +92,7 @@ export function AiAssistant() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about my projects..."
-                className="resize-none h-10 min-h-10"
+                className="resize-none h-10 min-h-10 bg-secondary/50"
                 onKeyDown={(e) => {
                     if (e.key === 'Enter' && !e.shiftKey) {
                         e.preventDefault();
@@ -115,9 +115,10 @@ export function AiAssistant() {
         <Button
             onClick={() => setIsOpen(!isOpen)}
             size="lg"
+            variant={isOpen ? 'secondary' : 'default'}
             className="rounded-full shadow-lg w-16 h-16"
             >
-            <Bot className="h-7 w-7" />
+            {isOpen ? <X className="h-7 w-7" /> : <Bot className="h-7 w-7" />}
         </Button>
       </motion.div>
     </div>

@@ -37,7 +37,7 @@ export function LandingPage() {
             <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
         </div>
 
-        <div className="relative z-10 flex flex-col items-center text-center">
+        <div className="relative z-10 flex flex-col items-center text-center p-4">
           <motion.h1 
             className="font-headline text-5xl font-bold md:text-7xl"
             initial={{ opacity: 0, y: -50 }}

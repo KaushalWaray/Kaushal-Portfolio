@@ -64,7 +64,7 @@ export function Header() {
             <GasOracle />
           </div>
           <div className="flex items-center gap-2 rounded-full bg-secondary/50 px-3 py-1.5 text-sm shadow-inner backdrop-blur-sm">
-            <CircleDollarSign className="h-4 w-4 text-primary" />
+            <CircleDollarSign className="h-4 w-4 text-accent" />
             <span className="font-mono font-medium text-foreground">
               {state.walletBalance.toFixed(4)}
             </span>

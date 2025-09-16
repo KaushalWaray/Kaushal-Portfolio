@@ -36,13 +36,13 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
       <motion.div
         className="w-72 group shrink-0"
         whileHover={{ scale: 1.05, y: -5 }}
-        transition={{ type: 'spring', stiffness: 300 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 15 }}
       >
         <div
           className={cn(
-            "relative w-full rounded-lg border-2 backdrop-blur-xl transition-all duration-500 h-[204px]",
+            "relative w-full rounded-lg border-2 backdrop-blur-xl transition-all duration-300 h-[204px] overflow-hidden",
             isMined
-              ? "border-accent/70 bg-accent/10 shadow-2xl shadow-accent/20"
+              ? "border-primary/50 bg-primary/10 shadow-2xl shadow-primary/10"
               : "border-border/50 bg-card/50"
           )}
         >
@@ -50,7 +50,7 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
             <motion.div
               className={cn(
                 "w-16 h-16 rounded-lg flex items-center justify-center transition-colors duration-300",
-                isMined ? "bg-accent text-accent-foreground" : "bg-muted text-muted-foreground"
+                isMined ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
               )}
             >
               <Icon className="h-8 w-8" />
@@ -61,7 +61,7 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
                   {isMined ? "Mined & Unlocked" : "Awaiting Proof-of-Work"}
                 </p>
             </div>
-            <div className={`absolute top-3 right-3 flex items-center gap-2 shrink-0 transition-colors duration-500 ${isMined ? 'text-accent' : 'text-muted-foreground'}`}>
+            <div className={`absolute top-3 right-3 flex items-center gap-2 shrink-0 transition-colors duration-500 ${isMined ? 'text-primary' : 'text-muted-foreground'}`}>
                 {isMined ? <Unlock className="h-4 w-4" /> : <Lock className="h-4 w-4" />}
             </div>
           </div>
@@ -73,7 +73,7 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
                 View Content
               </Button>
             ) : (
-              <Button className="w-full font-bold" onClick={() => setIsMintModalOpen(true)}>
+              <Button className="w-full font-bold" variant="secondary" onClick={() => setIsMintModalOpen(true)}>
                 <DownloadCloud className="mr-2 h-4 w-4" />
                 Mine Block
               </Button>
@@ -83,10 +83,11 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
           <AnimatePresence>
             {isMined && (
               <motion.div 
-                className="absolute inset-0 border-2 border-accent/80 rounded-lg"
-                initial={{ opacity: 0, scale: 0.9 }}
+                className="absolute inset-[-1px] border-2 border-primary/80 rounded-lg animate-glow"
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
                 style={{ pointerEvents: 'none' }}
               />
             )}

@@ -7,6 +7,7 @@ import type { PortfolioBlockId } from "@/lib/types";
 import { useAppContext } from "@/contexts/app-context";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
+import { AiAssistant } from "./ai-assistant";
 
 const contentBlockIds: PortfolioBlockId[] = ["about", "projects", "skills", "certifications", "contact"];
 
@@ -28,7 +29,7 @@ const MouseTrackedSpotlight = () => {
       ([x, y]) => `radial-gradient(600px at ${x}px ${y}px, hsl(var(--primary)/0.1), transparent 80%)`
     );
   
-    return <motion.div className="absolute inset-0 z-0" style={{ background }} />;
+    return <motion.div className="pointer-events-none absolute inset-0 z-10" style={{ background }} />;
 };
 
 
@@ -41,7 +42,7 @@ export function Dashboard() {
 
   const contentBlocks = contentBlockIds.map(id => portfolioData[id]);
   const totalBlocks = contentBlocks.length;
-  const blockWidth = 352; // 288px width + 64px gap
+  const blockWidth = 352; // w-72 (288px) + px-8 (64px)
   const chainWidth = totalBlocks * blockWidth;
 
   const chainVariants = {
@@ -49,7 +50,7 @@ export function Dashboard() {
       x: [0, -chainWidth],
       transition: {
         x: {
-          duration: totalBlocks * 10, // Slower, more majestic speed
+          duration: totalBlocks * 10,
           ease: "linear",
           repeat: Infinity,
         },
@@ -64,13 +65,11 @@ export function Dashboard() {
       <Header />
       <main className="flex-1 w-full relative flex flex-col items-center justify-center p-8">
         <div className="absolute inset-0 z-0">
-          {/* Grid background */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--secondary)/0.4)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--secondary)/0.4)_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
-           {/* Mouse-following spotlight */}
-           <MouseTrackedSpotlight />
         </div>
+        <MouseTrackedSpotlight />
 
-        <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
+        <div className="relative z-20 flex flex-col items-center justify-center w-full h-full">
             <div className="w-full h-96 flex items-center justify-center">
               {contentBlocks.length > 0 && (
                 <motion.div
@@ -93,6 +92,7 @@ export function Dashboard() {
             </div>
         </div>
       </main>
+      <AiAssistant />
     </div>
   );
 }
