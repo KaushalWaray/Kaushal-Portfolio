@@ -9,8 +9,11 @@ import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import { AiAssistant } from "./ai-assistant";
 import { OnboardingGuide } from "./onboarding-guide";
+import { RewardModal } from "./reward-modal";
 
 const contentBlockIds: PortfolioBlockId[] = ["about", "projects", "skills", "certifications", "contact"];
+const totalBlocksAvailable = contentBlockIds.length;
+
 
 const MouseTrackedSpotlight = () => {
     const mouseX = useMotionValue(0);
@@ -37,10 +40,21 @@ const MouseTrackedSpotlight = () => {
 export function Dashboard() {
   const [isClient, setIsClient] = useState(false);
   const { state } = useAppContext();
+  const [showRewardModal, setShowRewardModal] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  useEffect(() => {
+    if (state.mintedBlocks.length === totalBlocksAvailable && totalBlocksAvailable > 0) {
+      // Use a timeout to ensure the mint modal has closed
+      const timer = setTimeout(() => {
+        setShowRewardModal(true);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [state.mintedBlocks.length]);
 
   const contentBlocks = contentBlockIds.map(id => portfolioData[id]);
   const totalBlocks = contentBlocks.length;
@@ -96,6 +110,7 @@ export function Dashboard() {
       </main>
       {!state.hasCompletedOnboarding && state.isAuthenticated && <OnboardingGuide />}
       <AiAssistant />
+      <RewardModal isOpen={showRewardModal} onOpenChange={setShowRewardModal} />
     </div>
   );
 }
