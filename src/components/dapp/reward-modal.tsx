@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -11,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Check, Copy, Download } from "lucide-react";
 import { useAppContext } from "@/contexts/app-context";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { toPng } from 'html-to-image';
 import { motion } from 'framer-motion';
@@ -70,6 +71,17 @@ const NftIcon = () => (
     </div>
   );
 
+  async function getFontEmbedCSS() {
+    const fontFamilies = ["Inter:wght@400;500;700", "Space Grotesk:wght@400;500;700"];
+    const googleFontsURL = `https://fonts.googleapis.com/css2?family=${fontFamilies.join('&family=')}&display=swap`;
+  
+    const cssText = await fetch(googleFontsURL).then((res) => res.text());
+  
+    // Workaround for https://github.com/styleguidist/react-docgen-typescript/issues/366
+    const fontFaces = cssText.split('@font-face').slice(1).map(s => `@font-face{${s}}`).join('\n');
+    return fontFaces;
+  }
+
 export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
   const { state } = useAppContext();
   const { toast } = useToast();
@@ -94,13 +106,15 @@ export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
     setTimeout(() => setHasCopied(false), 2000);
   };
 
-  const handleDownload = async () => {
+  const handleDownload = useCallback(async () => {
     if (!certificateRef.current) return;
     setIsDownloading(true);
     try {
+        const fontEmbedCSS = await getFontEmbedCSS();
         const dataUrl = await toPng(certificateRef.current, { 
             cacheBust: true,
             pixelRatio: 2, // Higher resolution
+            fontEmbedCSS: fontEmbedCSS,
             style: {
                 transform: 'scale(1)',
                 transformOrigin: 'center'
@@ -120,7 +134,7 @@ export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
     } finally {
         setIsDownloading(false);
     }
-  }
+  }, []);
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
