@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Bot, Loader2, Send, Sparkles, X } from 'lucide-react';
+import { Loader2, Send, Sparkles, X } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { portfolioAssistant } from '@/ai/flows/portfolio-assistant-flow';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -16,6 +16,25 @@ type Message = {
   role: 'user' | 'assistant';
   content: string;
 };
+
+const AssistantIcon = (props: React.ComponentProps<'svg'>) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M12 3L9.5 8.5L4 11L9.5 13.5L12 19L14.5 13.5L20 11L14.5 8.5L12 3z" />
+      <path d="M5 3L7 8" />
+      <path d="M19 3L17 8" />
+      <path d="M5 21L7 16" />
+      <path d="M19 21L17 16" />
+    </svg>
+  );
 
 export function AiAssistant() {
   const { state } = useAppContext();
@@ -153,7 +172,7 @@ export function AiAssistant() {
                         variant={isOpen ? 'secondary' : 'default'}
                         className="rounded-full shadow-lg w-16 h-16"
                         >
-                        {isOpen ? <X className="h-7 w-7" /> : <Sparkles className="h-7 w-7" />}
+                        {isOpen ? <X className="h-7 w-7" /> : <AssistantIcon className="h-7 w-7" />}
                     </Button>
                 </TooltipTrigger>
                 {!isOpen && (
