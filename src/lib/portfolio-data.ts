@@ -16,7 +16,7 @@ export const portfolioData: Record<string, PortfolioBlock> = {
     title: 'About Me',
     content: {
       description:
-        "Motivated individual with a strong interest in blockchain technology and cloud computing. Actively pursuing a Master of Computer Applications degree, showcasing commitment to advanced technical knowledge and development. Dedicated to exploring innovative solutions and emerging technologies in the digital space. Seeking opportunities to contribute passion for blockchain and cloud systems to a dynamic and forward-thinking team.",
+        "I'm a developer passionate about building the secure, decentralized future of the web. With hands-on experience in both blockchain development and cloud infrastructure, I build robust, end-to-end solutions. My work includes creating decentralized storage applications and engineering automated DevSecOps pipelines to secure smart contracts. As I complete my Master of Computer Applications, I'm eager to apply my skills in a dynamic role where I can contribute to cutting-edge blockchain and Web3 projects.",
       profileImage: "https://i.imgur.com/t8yG4g4.jpeg",
       profileImageHint: "professional developer portrait",
     },
