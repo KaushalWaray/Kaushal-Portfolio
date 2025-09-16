@@ -29,6 +29,8 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
   const [isMintModalOpen, setIsMintModalOpen] = useState(false);
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
 
+  const blockNumber = useMemo(() => state.mintedBlocks.indexOf(block.id), [state.mintedBlocks, block.id]);
+
   const Icon = useMemo(() => blockIcons[block.id] || LinkIcon, [block.id]);
 
   return (
@@ -109,6 +111,7 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
           isOpen={isContentModalOpen}
           onOpenChange={setIsContentModalOpen}
           block={block}
+          blockNumber={blockNumber}
         />
       )}
     </>

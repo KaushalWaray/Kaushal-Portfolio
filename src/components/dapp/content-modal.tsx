@@ -19,6 +19,7 @@ import {
     isOpen: boolean;
     onOpenChange: (isOpen: boolean) => void;
     block: PortfolioBlock;
+    blockNumber: number;
   }
   
   const BlockInfoRow = ({ label, value }: { label: string; value: React.ReactNode }) => (
@@ -29,7 +30,7 @@ import {
   );
   
   
-  export function ContentModal({ isOpen, onOpenChange, block }: ContentModalProps) {
+  export function ContentModal({ isOpen, onOpenChange, block, blockNumber }: ContentModalProps) {
     const [timestamp, setTimestamp] = useState('');
 
     useEffect(() => {
@@ -44,7 +45,7 @@ import {
           <DialogHeader>
             <DialogTitle className="font-headline text-2xl">Block Details: {block.title}</DialogTitle>
             <DialogDescription>
-              Viewing content from mined block #{block.id.charCodeAt(0)}.
+              Viewing content from mined block #{blockNumber}.
             </DialogDescription>
           </DialogHeader>
           <ScrollArea className="max-h-[70vh]">
