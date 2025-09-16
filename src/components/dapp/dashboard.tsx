@@ -50,13 +50,12 @@ export function Dashboard() {
     }
   }, [state.mintedBlocks, contentBlocks, hasShownReward]);
 
-
   const doubledContentBlocks = useMemo(() => [...contentBlocks, ...contentBlocks], [contentBlocks]);
 
   return (
     <div className="min-h-screen w-full bg-background flex flex-col">
       <Header />
-      <main className="flex-1 w-full relative flex flex-col items-center justify-center py-12 overflow-hidden">
+      <main className="flex-1 w-full relative flex flex-col items-center justify-center py-12">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--secondary)/0.4)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--secondary)/0.4)_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
         </div>
@@ -66,7 +65,7 @@ export function Dashboard() {
             <motion.div
                 className="flex"
                 initial={{ x: 0 }}
-                animate={{ x: '-100%' }}
+                animate={{ x: '-50%' }}
                 transition={{
                     ease: 'linear',
                     duration: 60,
@@ -76,7 +75,7 @@ export function Dashboard() {
                 <div className="flex items-center">
                     {doubledContentBlocks.map((block, index) => (
                         <div key={`${block.id}-${index}`} className="flex items-center">
-                            <div className="mx-8">
+                            <div className="mx-8 py-4">
                               <PortfolioBlockDisplay block={portfolioData[block.id as PortfolioBlockId]} />
                             </div>
                             <svg width="64" height="24" viewBox="0 0 64 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-16 h-6 shrink-0 text-primary/30 -mx-8 z-[-1] relative">
