@@ -13,6 +13,7 @@ import {
   import { Button } from "../ui/button";
   import { ExternalLink, Github } from "lucide-react";
   import Link from "next/link";
+  import { useEffect, useState } from "react";
   
   interface ContentModalProps {
     isOpen: boolean;
@@ -29,6 +30,14 @@ import {
   
   
   export function ContentModal({ isOpen, onOpenChange, block }: ContentModalProps) {
+    const [timestamp, setTimestamp] = useState('');
+
+    useEffect(() => {
+        if (isOpen) {
+            setTimestamp(new Date().toISOString());
+        }
+    }, [isOpen]);
+
     return (
       <Dialog open={isOpen} onOpenChange={onOpenChange}>
         <DialogContent className="max-w-3xl">
@@ -40,13 +49,6 @@ import {
           </DialogHeader>
           <ScrollArea className="max-h-[70vh]">
             <div className="pr-6">
-                <div className="mt-4 rounded-lg border bg-card/50 p-4">
-                    <h3 className="font-headline text-lg mb-2">Block Data</h3>
-                    <BlockInfoRow label="Block Hash" value={`0x${block.id}b7...e5`} />
-                    <BlockInfoRow label="Timestamp" value={`${new Date().toISOString()}`} />
-                    <BlockInfoRow label="Mined By" value="0x...dEaD" />
-                </div>
-  
                 <div className="mt-6">
                     <h3 className="font-headline text-lg mb-2">Content</h3>
                     <div className="prose prose-invert max-w-none text-muted-foreground prose-p:text-base">
@@ -128,6 +130,13 @@ import {
                         </div>
                     ))}
   
+                </div>
+
+                <div className="mt-8 rounded-lg border bg-card/50 p-4">
+                    <h3 className="font-headline text-lg mb-2">Block Data</h3>
+                    <BlockInfoRow label="Block Hash" value={`0x${block.id}b7...e5`} />
+                    <BlockInfoRow label="Timestamp" value={timestamp} />
+                    <BlockInfoRow label="Mined By" value="0x...dEaD" />
                 </div>
             </div>
           </ScrollArea>
