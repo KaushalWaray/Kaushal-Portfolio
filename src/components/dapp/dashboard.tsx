@@ -8,7 +8,7 @@ import { AiAssistant } from "@/components/dapp/ai-assistant";
 import { motion } from 'framer-motion';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAppContext } from "@/contexts/app-context";
-import { Link, User } from "lucide-react";
+import { User } from "lucide-react";
 import React from "react";
 
 
@@ -130,7 +130,7 @@ export function Dashboard() {
                 </div>
             </motion.div>
           
-            {blockOrder.map((id, index) => (
+            {blockOrder.map((id) => (
                 <motion.div 
                     key={id} 
                     ref={getRef(id)} 

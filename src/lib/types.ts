@@ -1,5 +1,4 @@
 import type { LucideIcon } from "lucide-react";
-import type { StaticImageData } from "next/image";
 
 export type PortfolioBlockId = 'about' | 'projects' | 'skills' | 'contact';
 

@@ -1,20 +1,11 @@
 import type { PortfolioBlock } from './types';
-import { Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 import {
   IconAws,
   IconNextjs,
   IconReact,
-  IconShadcn,
   IconSolidity,
-  IconTailwind,
-  IconTs,
 } from '@/components/icons/tech-icons';
-import { PlaceHolderImages } from './placeholder-images';
-
-const metaDriveImage = PlaceHolderImages.find(p => p.id === 'kaushal-metadrive');
-const devsecopsImage = PlaceHolderImages.find(p => p.id === 'kaushal-devsecops');
-const profileImage = PlaceHolderImages.find(p => p.id === 'kaushal-profile');
-
 
 export const portfolioData: Record<string, PortfolioBlock> = {
   about: {
@@ -39,11 +30,11 @@ export const portfolioData: Record<string, PortfolioBlock> = {
           title: 'MetaDrive: Decentralized File Storage Sharing Wallet',
           description:
             'Engineered a decentralized storage app for Algorand. Utilized IPFS (Pinata) for file storage and a PyTeal contract for on-chain records. Implemented PIN-based encryption to secure wallet mnemonics.',
-          imageUrl: metaDriveImage?.imageUrl || '',
-          imageHint: metaDriveImage?.imageHint || '',
+          imageUrl: 'https://i.imgur.com/yV9n8J7.png',
+          imageHint: 'decentralized cloud storage diagram',
           techStack: [
             { name: 'Next.js', icon: IconNextjs },
-            { name: 'TypeScript', icon: IconTs },
+            { name: 'PyTeal', icon: IconReact }, // Using react icon as placeholder for PyTeal
           ],
           repoUrl: '#',
         },
