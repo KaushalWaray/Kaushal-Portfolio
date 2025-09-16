@@ -9,7 +9,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Confetti } from "lucide-react";
+import { PartyPopper } from "lucide-react";
 import { useAppContext } from "@/contexts/app-context";
 import { useCallback, useRef } from "react";
 import { toPng } from "html-to-image";
@@ -51,7 +51,7 @@ export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
       <DialogContent>
         <DialogHeader>
           <div className="flex justify-center items-center h-12 w-12 rounded-full bg-primary/10 mx-auto">
-            <Confetti className="h-6 w-6 text-primary" />
+            <PartyPopper className="h-6 w-6 text-primary" />
           </div>
           <DialogTitle className="font-headline text-center text-2xl pt-2">
             Proof of Exploration
@@ -98,7 +98,7 @@ export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
                     boxShadow: "inset 0 0 0 4px hsl(var(--primary)/0.5)",
                   }}
                 >
-                  <Confetti className="h-16 w-16 text-primary" />
+                  <PartyPopper className="h-16 w-16 text-primary" />
                 </div>
               </div>
               <h3 className="font-headline text-xl text-primary mt-4">
