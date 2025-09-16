@@ -41,8 +41,7 @@ export function LandingPage() {
             Kaushal<span className="text-primary animate-glow"> Waray</span>
           </h1>
           <p className="mt-4 max-w-xl text-lg text-muted-foreground">
-            Explore a portfolio experience reimagined for the decentralized web.
-            Connect your wallet to begin minting your journey.
+            A full-stack developer with a passion for blockchain and decentralized technologies. Explore my work and mint my journey.
           </p>
           <Button
             size="lg"
