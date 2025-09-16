@@ -40,7 +40,8 @@ export const portfolioData: Record<string, PortfolioBlock> = {
             // Using react icon as placeholder for PyTeal
             { name: 'PyTeal', icon: IconReact }, 
           ],
-          repoUrl: '#',
+          liveUrl: 'https://decstor.netlify.app/',
+          repoUrl: 'https://github.com/KaushalWaray/DecStor',
         },
         {
           title: 'Automated DevSecOps Pipeline for Smart Contracts',
