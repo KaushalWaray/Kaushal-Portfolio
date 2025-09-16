@@ -7,7 +7,6 @@ import type { PortfolioBlockId } from "@/lib/types";
 import { useAppContext } from "@/contexts/app-context";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
-import { AiAssistant } from "./ai-assistant";
 import { OnboardingGuide } from "./onboarding-guide";
 import { RewardModal } from "./reward-modal";
 
@@ -112,7 +111,6 @@ export function Dashboard() {
         </div>
       </main>
       {!state.hasCompletedOnboarding && state.isAuthenticated && <OnboardingGuide />}
-      <AiAssistant />
       <RewardModal isOpen={isRewardModalOpen} onOpenChange={setIsRewardModalOpen} />
     </div>
   );
