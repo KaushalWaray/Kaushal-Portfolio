@@ -87,8 +87,9 @@ export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
                 cacheBust: true, 
                 backgroundColor: 'hsl(224, 71%, 4%)',
                 fontEmbedCss: fontEmbedCss,
-                height: 500,
-                width: 500,
+                // Use dimensions from the element for better accuracy
+                width: rewardRef.current.offsetWidth,
+                height: rewardRef.current.offsetHeight,
              });
 
             const link = document.createElement('a');
@@ -116,13 +117,13 @@ export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
           </DialogDescription>
         </DialogHeader>
 
-        <div className="my-4 h-[350px] sm:h-auto sm:aspect-square flex items-center justify-center">
-            <div className="w-full max-w-[350px] aspect-square" ref={rewardRef}>
+        <div className="my-4 flex items-center justify-center">
+            <div className="w-full max-w-[300px] aspect-square" ref={rewardRef}>
                 <div className="w-full h-full rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 p-1 shadow-2xl">
                     <div className="w-full h-full rounded-[14px] bg-background p-6 flex flex-col justify-between items-center text-center border border-primary/50 relative overflow-hidden">
                         <div className="absolute inset-0 flex items-center justify-center">
                             <motion.div
-                                className="w-64 h-64 bg-primary/20 rounded-full"
+                                className="w-48 h-48 bg-primary/20 rounded-full"
                                 animate={{
                                     scale: [1, 1.1, 1, 1.2, 1],
                                     opacity: [0.3, 0.4, 0.3, 0.5, 0.3],
@@ -135,8 +136,8 @@ export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
                             />
                         </div>
                         <div className="flex flex-col items-center z-10">
-                            <div className="h-20 w-20 bg-primary/10 rounded-full flex items-center justify-center border-2 border-primary/50 mb-4">
-                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary">
+                            <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center border-2 border-primary/50 mb-3">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary">
                                    <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                    <path d="M2 7L12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                    <path d="M22 7L12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -144,10 +145,10 @@ export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
                                    <path d="M17 4.5L7 9.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
                             </div>
-                            <h3 className="font-headline text-xl text-primary">Proof of Exploration</h3>
-                            <p className="text-sm text-muted-foreground mt-1">Issued to Explorer</p>
+                            <h3 className="font-headline text-lg text-primary">Proof of Exploration</h3>
+                            <p className="text-xs text-muted-foreground mt-1">Issued to Explorer</p>
                         </div>
-                        <div className="w-full text-left font-mono text-xs space-y-2 z-10">
+                        <div className="w-full text-left font-mono text-[10px] space-y-1 z-10">
                             <p className="truncate"><span className="text-muted-foreground">Issuer:</span> Kaushal.dev</p>
                             <p className="truncate"><span className="text-muted-foreground">Tx Hash:</span> {transactionHash}</p>
                         </div>
@@ -163,12 +164,12 @@ export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
             </Button>
         </div>
         
-        <DialogFooter className="gap-2 sm:gap-0">
-          <Button variant="outline" onClick={handleDownload}>
+        <DialogFooter className="gap-2 sm:gap-0 sm:flex-row sm:justify-between">
+          <Button variant="outline" onClick={handleDownload} className="w-full sm:w-auto">
               <Download className="mr-2 h-4 w-4" />
               Download
           </Button>
-          <Button className="w-full" onClick={() => onOpenChange(false)}>
+          <Button className="w-full sm:w-auto" onClick={() => onOpenChange(false)}>
             Awesome!
           </Button>
         </DialogFooter>
@@ -176,5 +177,3 @@ export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
     </Dialog>
   );
 }
-
-    
