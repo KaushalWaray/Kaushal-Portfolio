@@ -28,7 +28,7 @@ const MouseTrackedSpotlight = () => {
   
     const background = useTransform(
       [mouseX, mouseY],
-      ([x, y]) => `radial-gradient(600px at ${x}px ${y}px, hsl(var(--primary)/0.15), transparent 80%)`
+      ([x, y]) => `radial-gradient(600px at ${x}px ${y}px, hsl(var(--primary)/0.1), transparent 80%)`
     );
   
     return <motion.div className="absolute inset-0 z-0" style={{ background }} />;
