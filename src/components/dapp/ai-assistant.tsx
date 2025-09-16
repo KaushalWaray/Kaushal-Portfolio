@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { portfolioAssistant } from '@/ai/flows/portfolio-assistant-flow';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useAppContext } from '@/contexts/app-context';
 
 type Message = {
   role: 'user' | 'assistant';
@@ -15,6 +16,7 @@ type Message = {
 };
 
 export function AiAssistant() {
+  const { state } = useAppContext();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -34,7 +36,11 @@ export function AiAssistant() {
             content: [{ text: m.content }]
         }));
 
-      const result = await portfolioAssistant({ question: input, history: genkitHistory });
+      const result = await portfolioAssistant({ 
+        question: input, 
+        history: genkitHistory,
+        mintedBlocks: state.mintedBlocks 
+      });
       if (result && result.answer) {
         setMessages([...newMessages, { role: 'assistant', content: result.answer }]);
       } else {
