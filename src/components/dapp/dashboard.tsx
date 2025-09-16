@@ -5,7 +5,7 @@ import { PortfolioBlockDisplay } from "@/components/dapp/portfolio-block";
 import { portfolioData } from "@/lib/portfolio-data";
 import type { PortfolioBlockId } from "@/lib/types";
 import { useAppContext } from "@/contexts/app-context";
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useState, useMemo } from "react";
 import { OnboardingGuide } from "./onboarding-guide";
 import { RewardModal } from "./reward-modal";
@@ -14,21 +14,21 @@ import { AiAssistant } from "./ai-assistant";
 const contentBlockIds: PortfolioBlockId[] = ["about", "projects", "skills", "education", "certifications", "contact"];
 
 const MouseTrackedSpotlight = () => {
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
   
     useEffect(() => {
       const handleMouseMove = (e: MouseEvent) => {
-        mouseX.set(e.clientX);
-        mouseY.set(e.clientY);
+        x.set(e.clientX);
+        y.set(e.clientY);
       };
       window.addEventListener("mousemove", handleMouseMove);
       return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, [mouseX, mouseY]);
+    }, [x, y]);
   
     const background = useTransform(
-      [mouseX, mouseY],
-      ([x, y]) => `radial-gradient(600px at ${x}px ${y}px, hsl(var(--primary)/0.1), transparent 80%)`
+      [x, y],
+      ([newX, newY]) => `radial-gradient(600px at ${newX}px ${newY}px, hsl(var(--primary)/0.1), transparent 80%)`
     );
   
     return <motion.div className="pointer-events-none absolute inset-0 z-10" style={{ background }} />;
