@@ -89,3 +89,7 @@
     stroke-dashoffset: 0;
   }
 }
+
+.animate-glow {
+  animation: glow 2.5s ease-in-out infinite;
+}
