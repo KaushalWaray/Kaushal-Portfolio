@@ -14,6 +14,7 @@ import {
   import { ExternalLink, Github, BookCopy } from "lucide-react";
   import Link from "next/link";
   import { useEffect, useState } from "react";
+  import { useAppContext } from "@/contexts/app-context";
   
   interface ContentModalProps {
     isOpen: boolean;
@@ -25,13 +26,19 @@ import {
   const BlockInfoRow = ({ label, value }: { label: string; value: React.ReactNode }) => (
     <div className="flex flex-col gap-1 border-t border-border/50 py-3 sm:flex-row sm:gap-4">
       <dt className="w-28 shrink-0 font-mono text-sm text-muted-foreground">{label}</dt>
-      <dd className="font-mono text-sm">{value}</dd>
+      <dd className="font-mono text-sm truncate">{value}</dd>
     </div>
   );
   
   
   export function ContentModal({ isOpen, onOpenChange, block, blockNumber }: ContentModalProps) {
     const [timestamp, setTimestamp] = useState('');
+    const { state } = useAppContext();
+
+    const formattedAddress = `${state.walletAddress.slice(
+      0,
+      6
+    )}...${state.walletAddress.slice(-4)}`;
 
     useEffect(() => {
         if (isOpen) {
@@ -85,7 +92,7 @@ import {
                                 <p className="text-sm text-muted-foreground mt-1">Digital Identity</p>
                                 <div className="mt-4 space-y-1 font-mono text-xs">
                                   <p><span className="text-muted-foreground">Token ID:</span> 7721</p>
-                                  <p><span className="text-muted-foreground">Owner:</span> 0x...dEaD</p>
+                                  <p><span className="text-muted-foreground">Owner:</span> {formattedAddress}</p>
                                 </div>
                             </div>
                           </div>
@@ -150,7 +157,7 @@ import {
                     <h3 className="font-headline text-lg mb-2">Block Data</h3>
                     <BlockInfoRow label="Block Hash" value={`0x${block.id}b7...e5`} />
                     <BlockInfoRow label="Timestamp" value={timestamp} />
-                    <BlockInfoRow label="Mined By" value="0x...dEaD" />
+                    <BlockInfoRow label="Mined By" value={state.walletAddress} />
                 </div>
             </div>
           </ScrollArea>
@@ -158,4 +165,3 @@ import {
       </Dialog>
     );
   }
-  
