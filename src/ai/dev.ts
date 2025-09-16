@@ -1,1 +1,5 @@
-// Flows will be imported for their side effects in this file.
+import { config } from 'dotenv';
+config();
+
+import '@/ai/flows/calculate-mint-cost.ts';
+import '@/ai/flows/simulate-gas-oracle.ts';
