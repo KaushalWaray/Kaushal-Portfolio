@@ -63,14 +63,14 @@ export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
         </DialogHeader>
 
         <motion.div
-          className="p-4"
+          className="p-2 sm:p-4"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.5, type: 'spring' }}
         >
           <div
             ref={nftRef}
-            className="p-6 bg-secondary/50 rounded-lg border border-primary/30 relative overflow-hidden"
+            className="p-4 sm:p-6 bg-secondary/50 rounded-lg border border-primary/30 relative overflow-hidden"
           >
             <div
               className="absolute inset-0 z-0"
@@ -81,7 +81,7 @@ export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
             ></div>
             <div className="relative z-10 flex flex-col items-center text-center">
               <div
-                className="relative w-40 h-40"
+                className="relative w-28 h-28 sm:w-40 sm:h-40"
               >
                 <div
                   className="w-full h-full bg-primary/20 animate-glow"
@@ -98,13 +98,13 @@ export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
                     boxShadow: "inset 0 0 0 4px hsl(var(--primary)/0.5)",
                   }}
                 >
-                  <PartyPopper className="h-16 w-16 text-primary" />
+                  <PartyPopper className="h-12 w-12 sm:h-16 sm:w-16 text-primary" />
                 </div>
               </div>
-              <h3 className="font-headline text-xl text-primary mt-4">
+              <h3 className="font-headline text-lg sm:text-xl text-primary mt-4">
                 Proof of Exploration
               </h3>
-              <p className="text-sm text-muted-foreground mt-1">
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                 Kaushal.dev
               </p>
               <div className="mt-4 w-full text-left font-mono text-xs space-y-1 rounded-md border border-border/50 p-2 bg-background/50">
@@ -115,7 +115,7 @@ export function RewardModal({ isOpen, onOpenChange }: RewardModalProps) {
           </div>
         </motion.div>
 
-        <DialogFooter className="gap-2 sm:gap-0">
+        <DialogFooter className="gap-2 sm:flex-row sm:gap-2">
           <Button className="w-full sm:w-auto" onClick={handleDownload}>
             Download PNG
           </Button>
