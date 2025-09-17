@@ -1,10 +1,11 @@
+
 "use client";
 
 import { Button } from "@/components/ui/button";
 import { useAppContext } from "@/contexts/app-context";
 import type { PortfolioBlock } from "@/lib/types";
 import { Lock, Unlock, Eye, DownloadCloud, LinkIcon, FileText, Briefcase, Star, Phone, Award, GraduationCap } from "lucide-react";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { MintModal } from "./mint-modal";
 import { ContentModal } from "./content-modal";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,6 +13,7 @@ import { cn } from "@/lib/utils";
 
 interface PortfolioBlockProps {
   block: PortfolioBlock;
+  onInteractionChange: (isInteracting: boolean) => void;
 }
 
 const blockIcons: Record<string, React.ElementType> = {
@@ -24,11 +26,16 @@ const blockIcons: Record<string, React.ElementType> = {
 };
 
 
-export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
+export function PortfolioBlockDisplay({ block, onInteractionChange }: PortfolioBlockProps) {
   const { state } = useAppContext();
   const isMined = state.mintedBlocks.includes(block.id);
   const [isMintModalOpen, setIsMintModalOpen] = useState(false);
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+
+  useEffect(() => {
+    onInteractionChange(isHovering || isContentModalOpen);
+  }, [isHovering, isContentModalOpen, onInteractionChange]);
 
   const blockNumber = useMemo(() => state.mintedBlocks.indexOf(block.id), [state.mintedBlocks, block.id]);
 
@@ -40,6 +47,8 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
         className="w-64 sm:w-72 group shrink-0"
         whileHover={{ scale: 1.05, y: -5 }}
         transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
       >
         <div
           className={cn(

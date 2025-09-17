@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Header } from "@/components/dapp/header";
@@ -40,6 +41,7 @@ export function Dashboard() {
   const { state } = useAppContext();
   const [showReward, setShowReward] = useState(false);
   const [hasShownReward, setHasShownReward] = useState(false);
+  const [isMarqueePaused, setIsMarqueePaused] = useState(false);
 
   const contentBlocks = useMemo(() => contentBlockIds.map(id => portfolioData[id]), []);
 
@@ -52,6 +54,8 @@ export function Dashboard() {
   }, [state.mintedBlocks, contentBlocks, hasShownReward]);
 
   const doubledContentBlocks = useMemo(() => [...contentBlocks, ...contentBlocks], [contentBlocks]);
+
+  const isAnimationPaused = state.isMinting || isMarqueePaused;
 
   return (
     <div className="min-h-screen w-full bg-background flex flex-col">
@@ -67,14 +71,17 @@ export function Dashboard() {
             <div
               className={cn(
                 "flex w-fit",
-                !state.isMinting && "animate-marquee"
+                "animate-marquee"
               )}
-              style={{ animationPlayState: state.isMinting ? 'paused' : 'running' }}
+              style={{ animationPlayState: isAnimationPaused ? 'paused' : 'running' }}
             >
               {doubledContentBlocks.map((block, index) => (
                 <div key={`${block.id}-${index}`} className="flex items-center shrink-0">
                   <div className="mx-4 sm:mx-8 py-4">
-                    <PortfolioBlockDisplay block={portfolioData[block.id as PortfolioBlockId]} />
+                    <PortfolioBlockDisplay 
+                        block={portfolioData[block.id as PortfolioBlockId]}
+                        onInteractionChange={setIsMarqueePaused}
+                    />
                   </div>
                   {index < doubledContentBlocks.length -1 && (
                     <svg width="64" height="24" viewBox="0 0 64 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-6 sm:w-16 shrink-0 text-primary/30 -mx-4 sm:-mx-8 z-[-1] relative">
