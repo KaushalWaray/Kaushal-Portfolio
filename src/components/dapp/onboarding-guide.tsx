@@ -37,7 +37,7 @@ const steps: OnboardingStep[] = [
   },
   {
     title: "Ask Me Anything!",
-    description: "Have a question about my skills or projects? Use the AI Assistant at the bottom right. It's trained on my portfolio data and can answer your questions.",
+    description: "Have a question about my skills or projects? Use the AI Assistant. It's trained on my portfolio data and can answer your questions based on the content you've unlocked.",
     icon: Bot,
   },
 ];
