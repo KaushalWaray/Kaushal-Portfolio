@@ -37,6 +37,26 @@ const portfolioAssistantPrompt = ai.definePrompt({
     portfolioContext: z.string(),
   })},
   output: { schema: PortfolioAssistantOutputSchema },
+  config: {
+    safetySettings: [
+        {
+          category: 'HARM_CATEGORY_HATE_SPEECH',
+          threshold: 'BLOCK_ONLY_HIGH',
+        },
+        {
+          category: 'HARM_CATEGORY_DANGEROUS_CONTENT',
+          threshold: 'BLOCK_ONLY_HIGH',
+        },
+        {
+          category: 'HARM_CATEGORY_HARASSMENT',
+          threshold: 'BLOCK_ONLY_HIGH',
+        },
+        {
+          category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
+          threshold: 'BLOCK_ONLY_HIGH',
+        },
+      ]
+  },
   prompt: `You are a helpful and friendly AI assistant for the owner of this portfolio.
 Your goal is to answer questions from visitors about the portfolio owner's skills, experience, and projects.
 You must ONLY use the provided portfolio data below to answer the questions. Do not make up information.
