@@ -63,29 +63,25 @@ export function Dashboard() {
 
         <div className="relative z-20 flex flex-col items-center justify-center w-full h-full">
           <div className="w-full overflow-hidden">
-            <motion.div
-              className="flex items-center"
-              animate={{ x: [0, '-50%'] }}
-              transition={{
-                ease: 'linear',
-                duration: 20,
-                repeat: Infinity,
-              }}
+            <div
+              className="flex w-fit animate-marquee"
             >
               {doubledContentBlocks.map((block, index) => (
                 <div key={`${block.id}-${index}`} className="flex items-center shrink-0">
                   <div className="mx-4 sm:mx-8 py-4">
                     <PortfolioBlockDisplay block={portfolioData[block.id as PortfolioBlockId]} />
                   </div>
-                  <svg width="64" height="24" viewBox="0 0 64 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-6 sm:w-16 shrink-0 text-primary/30 -mx-4 sm:-mx-8 z-[-1] relative">
-                      <path d="M0 12H10" stroke="currentColor" strokeWidth="2"/>
-                      <path d="M54 12H64" stroke="currentColor" strokeWidth="2"/>
-                      <path className="connector-line" d="M10 2L22 2V22H10V18C10 14.6863 12.6863 12 16 12C12.6863 12 10 9.31371 10 6V2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path className="connector-line" d="M54 2L42 2V22H54V18C54 14.6863 51.3137 12 48 12C51.3137 12 54 9.31371 54 6V2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                  {index < doubledContentBlocks.length -1 && (
+                    <svg width="64" height="24" viewBox="0 0 64 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-6 sm:w-16 shrink-0 text-primary/30 -mx-4 sm:-mx-8 z-[-1] relative">
+                        <path d="M0 12H10" stroke="currentColor" strokeWidth="2"/>
+                        <path d="M54 12H64" stroke="currentColor" strokeWidth="2"/>
+                        <path className="connector-line" d="M10 2L22 2V22H10V18C10 14.6863 12.6863 12 16 12C12.6863 12 10 9.31371 10 6V2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path className="connector-line" d="M54 2L42 2V22H54V18C54 14.6863 51.3137 12 48 12C51.3137 12 54 9.31371 54 6V2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  )}
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
       </main>

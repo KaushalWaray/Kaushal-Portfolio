@@ -74,11 +74,16 @@ export default {
           '0%, 100%': { filter: 'brightness(1)', textShadow: '0 0 8px hsl(var(--primary)/0.5)' },
           '50%': { filter: 'brightness(1.2)', textShadow: '0 0 12px hsl(var(--primary))' },
         },
+        'marquee': {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'glow': 'glow 2.5s ease-in-out infinite',
+        'marquee': 'marquee 40s linear infinite',
       },
     },
   },
