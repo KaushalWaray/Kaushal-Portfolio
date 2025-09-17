@@ -64,7 +64,7 @@ export function Dashboard() {
         <div className="relative z-20 flex flex-col items-center justify-center w-full h-full">
           <div className="w-full overflow-hidden">
             <motion.div
-              className="flex"
+              className="flex items-center"
               animate={{ x: [0, '-50%'] }}
               transition={{
                 ease: 'linear',
