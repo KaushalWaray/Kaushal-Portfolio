@@ -68,7 +68,7 @@ export function Dashboard() {
               animate={{ x: [0, '-50%'] }}
               transition={{
                 ease: 'linear',
-                duration: 30,
+                duration: 20,
                 repeat: Infinity,
               }}
             >
