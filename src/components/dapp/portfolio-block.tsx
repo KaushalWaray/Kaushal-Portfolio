@@ -37,7 +37,7 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
   return (
     <>
       <motion.div
-        className="w-72 group shrink-0"
+        className="w-64 sm:w-72 group shrink-0"
         whileHover={{ scale: 1.05, y: -5 }}
         transition={{ type: 'spring', stiffness: 300, damping: 15 }}
       >
