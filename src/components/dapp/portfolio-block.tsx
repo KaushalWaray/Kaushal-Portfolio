@@ -99,13 +99,11 @@ export function PortfolioBlockDisplay({ block }: PortfolioBlockProps) {
         </div>
       </motion.div>
       
-      {isMintModalOpen && (
-         <MintModal
-            isOpen={isMintModalOpen}
-            onOpenChange={setIsMintModalOpen}
-            block={block}
-        />
-      )}
+      <MintModal
+          isOpen={isMintModalOpen}
+          onOpenChange={setIsMintModalOpen}
+          block={block}
+      />
 
       {isMined && isContentModalOpen && (
         <ContentModal

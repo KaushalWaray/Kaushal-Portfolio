@@ -10,6 +10,7 @@ import { useEffect, useState, useMemo } from "react";
 import { OnboardingGuide } from "./onboarding-guide";
 import { RewardModal } from "./reward-modal";
 import { AiAssistant } from "./ai-assistant";
+import { cn } from "@/lib/utils";
 
 const contentBlockIds: PortfolioBlockId[] = ["about", "projects", "skills", "education", "certifications", "contact"];
 
@@ -64,7 +65,11 @@ export function Dashboard() {
         <div className="relative z-20 flex flex-col items-center justify-center w-full h-full">
           <div className="w-full overflow-hidden">
             <div
-              className="flex w-fit animate-marquee"
+              className={cn(
+                "flex w-fit",
+                !state.isMinting && "animate-marquee"
+              )}
+              style={{ animationPlayState: state.isMinting ? 'paused' : 'running' }}
             >
               {doubledContentBlocks.map((block, index) => (
                 <div key={`${block.id}-${index}`} className="flex items-center shrink-0">

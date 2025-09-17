@@ -35,6 +35,11 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
   const [progress, setProgress] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const handleOpenChange = (open: boolean) => {
+    onOpenChange(open);
+    dispatch({ type: "SET_MINTING_STATE", payload: open });
+  };
+
   const handleMintSuccess = useCallback(() => {
     dispatch({
       type: "MINT_BLOCK",
@@ -44,8 +49,8 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
       title: "Mint Successful!",
       description: `Block "${block.title}" added to the chain. +0.10 pETH reward!`,
     });
-    onOpenChange(false);
-  }, [dispatch, toast, onOpenChange, block.id, totalCost]);
+    handleOpenChange(false);
+  }, [dispatch, toast, block.id, totalCost]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -78,7 +83,7 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
   }, [isOpen, block, state.gasPrice, state.walletBalance]);
 
   useEffect(() => {
-    if (mintingState !== 'mining') return;
+    if (mintingState !== 'mining' || !isOpen) return;
 
     const timer = setInterval(() => {
         setProgress(prev => {
@@ -90,14 +95,14 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
             }
             return prev + 1;
         });
-    }, 40);
+    }, 20); // Reduced from 40ms to 20ms for a ~2 second animation
 
     return () => clearInterval(timer);
-  }, [mintingState, handleMintSuccess]);
+  }, [mintingState, isOpen, handleMintSuccess]);
 
 
   return (
-    <Dialog open={isOpen} onOpenChange={onOpenChange}>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="font-headline text-2xl">
@@ -144,7 +149,7 @@ export function MintModal({ isOpen, onOpenChange, block }: MintModalProps) {
 
         <DialogFooter>
            {mintingState === 'error' && (
-             <Button className="w-full" variant="outline" onClick={() => onOpenChange(false)}>
+             <Button className="w-full" variant="outline" onClick={() => handleOpenChange(false)}>
                 Close
             </Button>
            )}

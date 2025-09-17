@@ -23,6 +23,7 @@ interface AppState {
   gasPrice: number;
   hasCompletedOnboarding: boolean;
   isAssistantOpen: boolean;
+  isMinting: boolean;
 }
 
 const initialState: AppState = {
@@ -34,6 +35,7 @@ const initialState: AppState = {
   gasPrice: 0,
   hasCompletedOnboarding: false,
   isAssistantOpen: false,
+  isMinting: false,
 };
 
 // Actions
@@ -45,7 +47,8 @@ type Action =
   | { type: "MINT_BLOCK"; payload: { blockId: PortfolioBlockId; cost: number } }
   | { type: "SET_GAS_PRICE"; payload: number }
   | { type: "COMPLETE_ONBOARDING" }
-  | { type: "TOGGLE_ASSISTANT" };
+  | { type: "TOGGLE_ASSISTANT" }
+  | { type: "SET_MINTING_STATE"; payload: boolean };
 
 // Reducer
 function appReducer(state: AppState, action: Action): AppState {
@@ -87,6 +90,8 @@ function appReducer(state: AppState, action: Action): AppState {
       return { ...state, hasCompletedOnboarding: true };
     case "TOGGLE_ASSISTANT":
       return { ...state, isAssistantOpen: !state.isAssistantOpen };
+    case "SET_MINTING_STATE":
+        return { ...state, isMinting: action.payload };
     default:
       return state;
   }
